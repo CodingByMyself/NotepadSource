@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		370BEB3E1E270F06002B9C25 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 370BEB3D1E270F06002B9C25 /* Realm.framework */; };
 		370BEB411E273445002B9C25 /* CDSearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BEB401E273445002B9C25 /* CDSearchBarView.m */; };
+		370BEB441E278FFC002B9C25 /* CDNoteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BEB431E278FFC002B9C25 /* CDNoteDetailsViewController.m */; };
+		370BEB471E2792AF002B9C25 /* details_page_delete_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 370BEB451E2792AF002B9C25 /* details_page_delete_icon.png */; };
+		370BEB481E2792AF002B9C25 /* details_page_edit_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 370BEB461E2792AF002B9C25 /* details_page_edit_icon.png */; };
 		370F8B341E25DAE100D0DB23 /* CDBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F8B311E25DAE100D0DB23 /* CDBaseObject.m */; };
 		370F8B351E25DAE100D0DB23 /* CDNoteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F8B331E25DAE100D0DB23 /* CDNoteModel.m */; };
 		370F8B391E25DB8400D0DB23 /* CDNoteTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F8B381E25DB8400D0DB23 /* CDNoteTable.m */; };
@@ -116,6 +119,10 @@
 		370BEB3D1E270F06002B9C25 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		370BEB3F1E273445002B9C25 /* CDSearchBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSearchBarView.h; sourceTree = "<group>"; };
 		370BEB401E273445002B9C25 /* CDSearchBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDSearchBarView.m; sourceTree = "<group>"; };
+		370BEB421E278FFC002B9C25 /* CDNoteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDNoteDetailsViewController.h; sourceTree = "<group>"; };
+		370BEB431E278FFC002B9C25 /* CDNoteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDNoteDetailsViewController.m; sourceTree = "<group>"; };
+		370BEB451E2792AF002B9C25 /* details_page_delete_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = details_page_delete_icon.png; sourceTree = "<group>"; };
+		370BEB461E2792AF002B9C25 /* details_page_edit_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = details_page_edit_icon.png; sourceTree = "<group>"; };
 		370F8B301E25DAE100D0DB23 /* CDBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDBaseObject.h; sourceTree = "<group>"; };
 		370F8B311E25DAE100D0DB23 /* CDBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDBaseObject.m; sourceTree = "<group>"; };
 		370F8B321E25DAE100D0DB23 /* CDNoteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDNoteModel.h; sourceTree = "<group>"; };
@@ -586,6 +593,8 @@
 				37F065181E20E74400653D2E /* CDHomeViewController.m */,
 				3713A6691E2399A600E88A3F /* CDAddOrEditNoteViewController.h */,
 				3713A66A1E2399A600E88A3F /* CDAddOrEditNoteViewController.m */,
+				370BEB421E278FFC002B9C25 /* CDNoteDetailsViewController.h */,
+				370BEB431E278FFC002B9C25 /* CDNoteDetailsViewController.m */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -631,6 +640,8 @@
 		37FD642F1E248D8F00FE65E3 /* AddOrEdit */ = {
 			isa = PBXGroup;
 			children = (
+				370BEB451E2792AF002B9C25 /* details_page_delete_icon.png */,
+				370BEB461E2792AF002B9C25 /* details_page_edit_icon.png */,
 				370F8B501E261B2200D0DB23 /* new_or_edit_cell_voice_icon.png */,
 				370F8B511E261B2200D0DB23 /* new_or_edit_delete_attachment_icon.png */,
 				3769BE9E1E25BD950077B7D8 /* new_or_edit_menu_item_time_icon.png */,
@@ -718,6 +729,7 @@
 				37F065421E20E95800653D2E /* Icon-Small@3x.png in Resources */,
 				370F8B521E261B2200D0DB23 /* new_or_edit_cell_voice_icon.png in Resources */,
 				37F0653B1E20E95800653D2E /* Icon-76@2x.png in Resources */,
+				370BEB481E2792AF002B9C25 /* details_page_edit_icon.png in Resources */,
 				37F0653D1E20E95800653D2E /* Icon-iPadPro@2x.png in Resources */,
 				3713A64C1E23493600E88A3F /* home_navigation_search_icon@2x.png in Resources */,
 				3713A64F1E2366E000E88A3F /* home_filter_view_bg.png in Resources */,
@@ -726,6 +738,7 @@
 				37F065461E20E95800653D2E /* Icon.png in Resources */,
 				37F0653F1E20E95800653D2E /* Icon-Small-50@2x.png in Resources */,
 				37FD643F1E248EBD00FE65E3 /* new_or_edit_menu_item_calendar_icon.png in Resources */,
+				370BEB471E2792AF002B9C25 /* details_page_delete_icon.png in Resources */,
 				3713A6621E238D3F00E88A3F /* home_cell_mark_note_icon@2x.png in Resources */,
 				37F065491E20E95800653D2E /* iTunesArtwork@2x.png in Resources */,
 				37F065381E20E95800653D2E /* Icon-72.png in Resources */,
@@ -806,6 +819,7 @@
 				3713A6411E233FF300E88A3F /* CDFilterSelectView.m in Sources */,
 				3713A6521E236E0A00E88A3F /* CDBaseTableViewCell.m in Sources */,
 				37F065191E20E74400653D2E /* CDHomeViewController.m in Sources */,
+				370BEB441E278FFC002B9C25 /* CDNoteDetailsViewController.m in Sources */,
 				370F8B4F1E26183600D0DB23 /* CDPictureCollectionCell.m in Sources */,
 				37FD642E1E247D8000FE65E3 /* CDAddAttachmentMenuView.m in Sources */,
 				3713A6661E2390D300E88A3F /* JSONKit.m in Sources */,

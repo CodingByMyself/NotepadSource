@@ -51,6 +51,11 @@
     self.buttonDelete.tag = self.tag;
 }
 
+- (void)setDisableEidt
+{
+    self.buttonDelete.hidden = YES;
+}
+
 - (void)setPath:(NSString *)path
 {
     _path = path;

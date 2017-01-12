@@ -18,4 +18,6 @@
 //- (void)setButtonPlayerAction:(SEL)action andTarget:(id)target;
 - (void)setButtonDeleteAction:(SEL)action andTarget:(id)target;
 
+- (void)setDisableEidt;
+
 @end

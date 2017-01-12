@@ -12,4 +12,6 @@
 
 - (void)setup:(NSString *)text OnInputTextChanged:(void(^)(NSString *textString))textCahnged;
 
+- (void)setDisableEidt;
+
 @end

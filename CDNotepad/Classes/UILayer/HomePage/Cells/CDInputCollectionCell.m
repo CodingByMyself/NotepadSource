@@ -25,6 +25,13 @@
     [self setContentText:text];
 }
 
+- (void)setDisableEidt
+{
+    self.textViewInputContent.editable = NO;
+    self.textViewInputContent.layer.cornerRadius = 0;
+    self.textViewInputContent.layer.borderWidth = 0;
+}
+
 - (void)setContentText:(NSString *)content
 {
     self.textViewInputContent.text = content.length > 0 ? content : @"";

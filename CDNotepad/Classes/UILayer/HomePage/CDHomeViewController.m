@@ -11,6 +11,7 @@
 #import "CDNoteItemCell.h"
 #import "CDNoteModel.h"
 #import "CDAddOrEditNoteViewController.h"
+#import "CDNoteDetailsViewController.h"
 #import "CDSearchBarView.h"
 
 @interface CDHomeViewController () <UITableViewDelegate,UITableViewDataSource,CDKeyboardManagerDelegate>
@@ -219,8 +220,8 @@
     self.filterView.tag = 0;
     
     CDNoteModel *model = [self.notesArray objectAtIndex:indexPath.section];
-    CDAddOrEditNoteViewController *eidtController = [[CDAddOrEditNoteViewController alloc] initWithControllerType:1 andNoteModel:model];
-    [self.navigationController pushViewController:eidtController animated:YES];
+    CDNoteDetailsViewController *detailsController = [[CDNoteDetailsViewController alloc] initWithNote:model];
+    [self.navigationController pushViewController:detailsController animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
