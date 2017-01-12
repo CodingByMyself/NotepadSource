@@ -1,0 +1,94 @@
+//
+//  NotepadPrefixHeader.pch
+//  CDNotepad
+//
+//  Created by Cindy on 2017/1/7.
+//  Copyright © 2017年 Comtop. All rights reserved.
+//
+
+#ifndef NotepadPrefixHeader_pch
+#define NotepadPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#define SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
+// 判断手机型号
+#define IS_IPHONE_6Plus     ([[UIScreen mainScreen ] bounds].size.height == 736)
+#define IS_IPHONE_6         ([[UIScreen mainScreen ] bounds].size.height == 667)
+#define IS_IPHONE_5         ([[UIScreen mainScreen ] bounds].size.height == 568)
+#define IS_IPHONE_4         ([[UIScreen mainScreen ] bounds].size.height == 480)
+
+#define UIFONT_20  [UIFont systemFontOfSize:20]
+#define UIFONT_18  [UIFont systemFontOfSize:18]
+#define UIFONT_16  [UIFont systemFontOfSize:16]
+#define UIFONT_14  [UIFont systemFontOfSize:14]
+#define UIFONT_12  [UIFont systemFontOfSize:12]
+#define UIFONT_10  [UIFont systemFontOfSize:10]
+#define FontSystem(textSize)  [UIFont systemFontOfSize:(textSize)];
+#define UIFONT_BOLD_20  [UIFont boldSystemFontOfSize:20]
+#define UIFONT_BOLD_18  [UIFont boldSystemFontOfSize:18]
+#define UIFONT_BOLD_16  [UIFont boldSystemFontOfSize:16]
+#define UIFONT_BOLD_14  [UIFont boldSystemFontOfSize:14]
+#define UIFONT_BOLD_12  [UIFont boldSystemFontOfSize:12]
+#define UIFONT_BOLD_10  [UIFont boldSystemFontOfSize:10]
+#define FontBoldSystem(textSize)  [UIFont boldSystemFontOfSize:(textSize)];
+
+
+#define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
+
+/**
+ *  底部导航的高度
+ */
+#define CDTabBarBottomViewHeight  49.0f
+#define CDScreenMarginAtLeftAndRight  15.0
+
+
+/**
+ *  获得指定颜色值的实例
+ *  @param r R值
+ *  @param g G值
+ *  @param b B值
+ *  @param a 透明度
+ *  @return UIColor的一个实例
+ */
+#define DefineColorRGB(r, g, b, a)  [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+/**
+ *  获得指定颜色值的实例
+ *  @param hexValue 十六进制颜色值
+ *  @return UIColor的一个实例
+ */
+#define DefineColorHEX(hexValue) [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 green:((float)((hexValue & 0xFF00) >> 8))/255.0 blue:((float)(hexValue & 0xFF))/255.0 alpha:1.0]  // rgb颜色转换（16进制->10进制）
+
+// 底部导航条的title显色
+#define TAB_BAR_BOTTOM_ITEM_TITLE_COLOR  DefineColorRGB(240.0, 100.0, 20.0, 1.0)
+#define TAB_BAR_BOTTOM_VIEW_BG_COLOR  DefineColorRGB(245.0, 245.0, 245.0, 1.0)
+// 添加底部阴影
+#define VIEW_BOTTOM_SHADOW_COLOR  DefineColorRGB(190.0, 190.0, 190.0, 1.0)
+// 色系定义宏
+#define MainColor DefineColorHEX(0xff7e00) // 主色系 - 橙色
+#define NavigationBarTitleColor DefineColorRGB(50, 50, 50, 1.0)
+#define COLOR_TITLE1  [UIColor darkTextColor]
+#define COLOR_TITLE2  [UIColor darkGrayColor]
+
+
+
+#import "CDTabBarController.h"
+#import "CDNavigationController.h"
+#import "CDBaseViewController.h"
+#import "CDBaseTableViewCell.h"
+
+#import <Realm/Realm.h>
+#import "CDTools.h"
+#import "Masonry.h"
+#import "JSONKit.h"
+#import "UIView+Frame.h"
+#import "CDDateHelper.h"
+#import "CDKeyboardManager.h"
+#import "CDCollectionViewFlowLayout.h"
+#import "CDAlertObject.h"
+
+
+#endif /* NotepadPrefixHeader_pch */
