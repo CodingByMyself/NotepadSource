@@ -11,8 +11,9 @@
 #import "CDNoteItemCell.h"
 #import "CDNoteModel.h"
 #import "CDAddOrEditNoteViewController.h"
+#import "CDSearchBarView.h"
 
-@interface CDHomeViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface CDHomeViewController () <UITableViewDelegate,UITableViewDataSource,CDKeyboardManagerDelegate>
 {
     NSInteger _filterIndex;
 }
@@ -23,6 +24,8 @@
 
 @property (nonatomic,strong) UITableView *tableViewNotes;
 
+@property (nonatomic,strong) CDSearchBarView *searchView;
+
 @end
 
 @implementation CDHomeViewController
@@ -31,9 +34,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _filterIndex = 0;
+    // 左侧搜索按钮
+    UIButton *rightButtonOne = [[UIButton alloc] init];
+    rightButtonOne.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [rightButtonOne setImage:[UIImage imageNamed:@"home_navigation_search_icon"] forState:UIControlStateNormal];
+    [rightButtonOne setTintColor:[UIColor whiteColor]];
+    rightButtonOne.cd_size = CGSizeMake(30.0, 20.0);
+    rightButtonOne.tag = 2;
+    [rightButtonOne addTarget:self action:@selector(navigationButtonPressEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];// 监听按钮点击
+    self.navigationItem.leftBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:rightButtonOne]];
     
-    [self initButtonItem];
+    // title设置
     [self initTitleView];
     
     
@@ -46,15 +57,19 @@
 {
     [super viewWillAppear:animated];
     
+    [[CDKeyboardManager sharedKeyboard] setEventDelegate:self];
+    
     [self filterDataListByIndex:_filterIndex];
     [self.tableViewNotes reloadData];
 }
 
+#pragma mark
 - (void)initTitleView
 {
     [self.buttonTitle addTarget:self action:@selector(navigationButtonPressEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside]; // 监听按钮点击
     self.buttonTitle.tag = 0;
     UILabel *title = [self.buttonTitle viewWithTag:100];
+    _filterIndex = 0;
     title.text = @"全部";
     CGSize textSize = [title textRectForBounds:CGRectMake(0, 0, SCREEN_WIDTH - 200.0, 64.0) limitedToNumberOfLines:1].size;
     [title mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -63,27 +78,6 @@
     }];
     self.buttonTitle.cd_size = CGSizeMake(textSize.width + 10*2.0 + 15.0, 44.0);
     self.navigationItem.titleView = self.buttonTitle;
-}
-
-- (void)initButtonItem
-{
-    UIButton *rightButtonOne = [[UIButton alloc] init];
-    rightButtonOne.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [rightButtonOne setImage:[UIImage imageNamed:@"home_navigation_search_icon"] forState:UIControlStateNormal];
-    [rightButtonOne setTintColor:[UIColor whiteColor]];
-    rightButtonOne.cd_size = CGSizeMake(30.0, 20.0);
-    rightButtonOne.tag = 2;
-    [rightButtonOne addTarget:self action:@selector(navigationButtonPressEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];// 监听按钮点击
-    
-//    UIButton *rightButtonTwo = [[UIButton alloc] init];
-//    rightButtonTwo.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//    [rightButtonTwo setImage:[UIImage imageNamed:@"home_navigation_left_calendar_icon"] forState:UIControlStateNormal];
-//    [rightButtonTwo setTintColor:[UIColor whiteColor]];
-//    rightButtonTwo.cd_size = CGSizeMake(30.0, 20.0);
-//    rightButtonTwo.tag = 1;
-//    [rightButtonTwo addTarget:self action:@selector(navigationButtonPressEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];// 监听按钮点击
-    
-    self.navigationItem.leftBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:rightButtonOne]];
     
     
     /***** 右侧按钮 *****/
@@ -93,6 +87,25 @@
     [leftButton setTintColor:[UIColor whiteColor]];
     leftButton.cd_size = CGSizeMake(30.0, 20.0);
     leftButton.tag = 3;
+    // 监听按钮点击
+    [leftButton addTarget:self action:@selector(navigationButtonPressEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+}
+
+- (void)initTitleViewToSearchBar
+{
+    self.searchView.cd_size = CGSizeMake(SCREEN_WIDTH - 60*2, 44.0);
+    self.navigationItem.titleView = self.searchView;
+    
+    
+    /***** 右侧按钮 *****/
+    UIButton *leftButton = [[UIButton alloc] init];
+    leftButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [leftButton setTitle:@"取消" forState:UIControlStateNormal];
+    leftButton.titleLabel.font = UIFONT_14;
+    [leftButton setTitleColor:COLOR_TITLE2 forState:UIControlStateNormal];
+    leftButton.cd_size = CGSizeMake(40.0, 20.0);
+    leftButton.tag = 4;
     // 监听按钮点击
     [leftButton addTarget:self action:@selector(navigationButtonPressEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
@@ -158,6 +171,10 @@
             self.filterView.hidden = YES;
             self.filterView.tag = 0;
             
+            
+            [self initTitleViewToSearchBar];
+            
+            
         }
             break;
         case 3:
@@ -167,6 +184,15 @@
             // 点击添加新的记事本
             CDAddOrEditNoteViewController *addController = [[CDAddOrEditNoteViewController alloc] init];
             [self.navigationController pushViewController:addController animated:YES];
+        }
+            break;
+        case 4:  // 取消搜索状态
+        {
+            self.filterView.hidden = YES;
+            self.filterView.tag = 0;
+            
+            [self initTitleView];
+            [self filterDataListByIndex:_filterIndex];
         }
             break;
         default:
@@ -186,6 +212,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.searchView.textField resignFirstResponder];
+    self.searchView.textField.text = @"";
+    
     self.filterView.hidden = YES;
     self.filterView.tag = 0;
     
@@ -256,6 +285,18 @@
         [alertView showAlert];
     }];
     return @[deleteRowAction];
+}
+
+#pragma mark Keyboard Delegate
+- (void)textFieldTheTextChanged:(UITextField *)textField
+{
+    if (self.searchView.textField == textField) {
+        NSString *searchKeyword = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSString *sql = [NSString stringWithFormat:@"note_content CONTAINS \"%@\"",searchKeyword];
+        NSArray *result = [CDNoteModel queryObjectByCondition:sql];
+        self.notesArray = [NSMutableArray arrayWithArray:result];
+        [self.tableViewNotes reloadData];
+    }
 }
 
 #pragma mark - Getter Method
@@ -332,25 +373,13 @@
     return _tableViewNotes;
 }
 
-//- (NSMutableArray *)notesArray
-//{
-//    if (_notesArray == nil) {
-//        [self filterDataListByIndex:_filterIndex]
-////        for (NSInteger i = 0; i < 20; i ++) {
-////            CDNoteModel *note = [[CDNoteModel alloc] init];
-////            if (i % 2 == 0) {
-////                note.title = @"我是测试用的title数据哦，我再重复一次，我是测试用的title数据哦.";
-////            } else {
-////                note.title = @"我是测试用的title数据哦ooo.";
-////            }
-////            note.createDate = [NSDate date];
-////            note.mark = i%3;
-////            note.voicePathList = i%3 ? @[] : @[@""];
-////            note.picturePathList = i%5 ? @[] : @[@""];
-////            [_notesArray addObject:note];
-////        }
-//    }
-//    return _notesArray;
-//}
+- (CDSearchBarView *)searchView
+{
+    if (_searchView == nil) {
+        _searchView = [[CDSearchBarView alloc] init];
+        
+    }
+    return _searchView;
+}
 
 @end

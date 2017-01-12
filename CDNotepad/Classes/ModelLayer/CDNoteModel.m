@@ -89,6 +89,41 @@
     return [NSArray arrayWithArray:temp];
 }
 
++ (NSArray *)queryObjectByCondition:(NSString *)condition
+{
+    NSMutableArray *tempObjectList = [[NSMutableArray alloc] init];
+    RLMResults *listObject = [CDRealmTableManager queryObjectListByCondition:condition fromClassName:[CDNoteTable className]];
+    for (CDNoteTable *noteTable in listObject) {
+        CDNoteModel *model = [[CDNoteModel alloc] init];
+        model.noteId = noteTable.rm_id;
+        model.title = noteTable.note_content;
+        model.createDate = [CDDateHelper dateFromString:noteTable.note_create_date byFormat:@"yyyyMMddHHmmss"];
+        // 附件
+        NSString *sql = [NSString stringWithFormat:@"relation_note_id = %zi",model.noteId];
+        RLMResults *relationResourceList = [CDRealmTableManager queryObjectListByCondition:sql fromClassName:[CDResourceTable className]];
+        for (CDResourceTable *resource in relationResourceList) {
+            if (resource.resource_type == 0) {
+                [model.picturePathList addObject:resource.resource_path];
+            } else if (resource.resource_type == 1) {
+                [model.voicePathList addObject:resource.resource_path];
+            }
+        }
+        
+        [tempObjectList addObject:model];
+    }
+    // 按时间来排序
+    [tempObjectList sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        CDNoteModel *model1 = (CDNoteModel *)obj1;
+        CDNoteModel *model2 = (CDNoteModel *)obj2;
+        if ([model1.createDate timeIntervalSince1970] > [model2.createDate timeIntervalSince1970]) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedDescending;
+        }
+    }];
+    return [NSArray arrayWithArray:tempObjectList];
+}
+
 - (BOOL)deleteObject
 {
     NSString *sqlOne = [NSString stringWithFormat:@"rm_id = %zi",self.noteId];

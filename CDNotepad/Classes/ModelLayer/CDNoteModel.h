@@ -24,6 +24,7 @@
 
 - (BOOL)insertTable;
 + (NSArray *)allObject;
++ (NSArray *)queryObjectByCondition:(NSString *)condition;
 - (BOOL)deleteObject;
 - (BOOL)updateObject;
 
