@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370BEB3E1E270F06002B9C25 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 370BEB3D1E270F06002B9C25 /* Realm.framework */; };
 		370F8B341E25DAE100D0DB23 /* CDBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F8B311E25DAE100D0DB23 /* CDBaseObject.m */; };
 		370F8B351E25DAE100D0DB23 /* CDNoteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F8B331E25DAE100D0DB23 /* CDNoteModel.m */; };
 		370F8B391E25DB8400D0DB23 /* CDNoteTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F8B381E25DB8400D0DB23 /* CDNoteTable.m */; };
@@ -111,6 +112,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		370BEB3D1E270F06002B9C25 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		370F8B301E25DAE100D0DB23 /* CDBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDBaseObject.h; sourceTree = "<group>"; };
 		370F8B311E25DAE100D0DB23 /* CDBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDBaseObject.m; sourceTree = "<group>"; };
 		370F8B321E25DAE100D0DB23 /* CDNoteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDNoteModel.h; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				370BEB3E1E270F06002B9C25 /* Realm.framework in Frameworks */,
 				370F8B461E25E09500D0DB23 /* libstdc++.tbd in Frameworks */,
 				370F8B441E25E08B00D0DB23 /* libz.tbd in Frameworks */,
 				370F8B421E25E08100D0DB23 /* libc++.tbd in Frameworks */,
@@ -284,6 +287,7 @@
 		370F8B2B1E25DA4800D0DB23 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
+				370BEB3D1E270F06002B9C25 /* Realm.framework */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
