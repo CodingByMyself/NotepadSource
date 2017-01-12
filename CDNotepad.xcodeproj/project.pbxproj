@@ -12,6 +12,12 @@
 		370BEB441E278FFC002B9C25 /* CDNoteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BEB431E278FFC002B9C25 /* CDNoteDetailsViewController.m */; };
 		370BEB471E2792AF002B9C25 /* details_page_delete_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 370BEB451E2792AF002B9C25 /* details_page_delete_icon.png */; };
 		370BEB481E2792AF002B9C25 /* details_page_edit_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 370BEB461E2792AF002B9C25 /* details_page_edit_icon.png */; };
+		370BEB4B1E27A031002B9C25 /* CDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BEB4A1E27A031002B9C25 /* CDLoginViewController.m */; };
+		370BEB4E1E27A266002B9C25 /* CDLoginHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BEB4D1E27A266002B9C25 /* CDLoginHeaderCell.m */; };
+		370BEB511E27A434002B9C25 /* CDLoginInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BEB501E27A434002B9C25 /* CDLoginInputCell.m */; };
+		370BEB531E27A606002B9C25 /* login_page_user_name_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 370BEB521E27A606002B9C25 /* login_page_user_name_icon.png */; };
+		370BEB561E27AB23002B9C25 /* CDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BEB551E27AB23002B9C25 /* CDRegisterViewController.m */; };
+		370BEB591E27AD5C002B9C25 /* CDLoginButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BEB581E27AD5C002B9C25 /* CDLoginButtonCell.m */; };
 		370F8B341E25DAE100D0DB23 /* CDBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F8B311E25DAE100D0DB23 /* CDBaseObject.m */; };
 		370F8B351E25DAE100D0DB23 /* CDNoteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F8B331E25DAE100D0DB23 /* CDNoteModel.m */; };
 		370F8B391E25DB8400D0DB23 /* CDNoteTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F8B381E25DB8400D0DB23 /* CDNoteTable.m */; };
@@ -123,6 +129,17 @@
 		370BEB431E278FFC002B9C25 /* CDNoteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDNoteDetailsViewController.m; sourceTree = "<group>"; };
 		370BEB451E2792AF002B9C25 /* details_page_delete_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = details_page_delete_icon.png; sourceTree = "<group>"; };
 		370BEB461E2792AF002B9C25 /* details_page_edit_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = details_page_edit_icon.png; sourceTree = "<group>"; };
+		370BEB491E27A031002B9C25 /* CDLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDLoginViewController.h; sourceTree = "<group>"; };
+		370BEB4A1E27A031002B9C25 /* CDLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDLoginViewController.m; sourceTree = "<group>"; };
+		370BEB4C1E27A266002B9C25 /* CDLoginHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDLoginHeaderCell.h; sourceTree = "<group>"; };
+		370BEB4D1E27A266002B9C25 /* CDLoginHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDLoginHeaderCell.m; sourceTree = "<group>"; };
+		370BEB4F1E27A434002B9C25 /* CDLoginInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDLoginInputCell.h; sourceTree = "<group>"; };
+		370BEB501E27A434002B9C25 /* CDLoginInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDLoginInputCell.m; sourceTree = "<group>"; };
+		370BEB521E27A606002B9C25 /* login_page_user_name_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_page_user_name_icon.png; sourceTree = "<group>"; };
+		370BEB541E27AB23002B9C25 /* CDRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRegisterViewController.h; sourceTree = "<group>"; };
+		370BEB551E27AB23002B9C25 /* CDRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRegisterViewController.m; sourceTree = "<group>"; };
+		370BEB571E27AD5C002B9C25 /* CDLoginButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDLoginButtonCell.h; sourceTree = "<group>"; };
+		370BEB581E27AD5C002B9C25 /* CDLoginButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDLoginButtonCell.m; sourceTree = "<group>"; };
 		370F8B301E25DAE100D0DB23 /* CDBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDBaseObject.h; sourceTree = "<group>"; };
 		370F8B311E25DAE100D0DB23 /* CDBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDBaseObject.m; sourceTree = "<group>"; };
 		370F8B321E25DAE100D0DB23 /* CDNoteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDNoteModel.h; sourceTree = "<group>"; };
@@ -351,6 +368,12 @@
 			children = (
 				370F8B5E1E26574100D0DB23 /* CDHeaderCell.h */,
 				370F8B5F1E26574100D0DB23 /* CDHeaderCell.m */,
+				370BEB4C1E27A266002B9C25 /* CDLoginHeaderCell.h */,
+				370BEB4D1E27A266002B9C25 /* CDLoginHeaderCell.m */,
+				370BEB4F1E27A434002B9C25 /* CDLoginInputCell.h */,
+				370BEB501E27A434002B9C25 /* CDLoginInputCell.m */,
+				370BEB571E27AD5C002B9C25 /* CDLoginButtonCell.h */,
+				370BEB581E27AD5C002B9C25 /* CDLoginButtonCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -557,6 +580,7 @@
 		37F065041E20E57A00653D2E /* ResouresAssets */ = {
 			isa = PBXGroup;
 			children = (
+				370BEB521E27A606002B9C25 /* login_page_user_name_icon.png */,
 				37FD642F1E248D8F00FE65E3 /* AddOrEdit */,
 				3713A6671E23953200E88A3F /* test_picture.png */,
 				3713A6601E238D3F00E88A3F /* home_cell_mark_note_icon@2x.png */,
@@ -605,6 +629,10 @@
 				370F8B5D1E26572400D0DB23 /* Cells */,
 				37F0651A1E20E76700653D2E /* CDMineViewController.h */,
 				37F0651B1E20E76700653D2E /* CDMineViewController.m */,
+				370BEB491E27A031002B9C25 /* CDLoginViewController.h */,
+				370BEB4A1E27A031002B9C25 /* CDLoginViewController.m */,
+				370BEB541E27AB23002B9C25 /* CDRegisterViewController.h */,
+				370BEB551E27AB23002B9C25 /* CDRegisterViewController.m */,
 			);
 			path = PersonCenter;
 			sourceTree = "<group>";
@@ -742,6 +770,7 @@
 				3713A6621E238D3F00E88A3F /* home_cell_mark_note_icon@2x.png in Resources */,
 				37F065491E20E95800653D2E /* iTunesArtwork@2x.png in Resources */,
 				37F065381E20E95800653D2E /* Icon-72.png in Resources */,
+				370BEB531E27A606002B9C25 /* login_page_user_name_icon.png in Resources */,
 				37F065111E20E67B00653D2E /* tab_bar_bottom_item_icon_home_0@2x.png in Resources */,
 				37F065401E20E95800653D2E /* Icon-Small.png in Resources */,
 				37F065481E20E95800653D2E /* iTunesArtwork.png in Resources */,
@@ -777,6 +806,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				370BEB561E27AB23002B9C25 /* CDRegisterViewController.m in Sources */,
 				370F8B391E25DB8400D0DB23 /* CDNoteTable.m in Sources */,
 				37F064FF1E20E00600653D2E /* NSArray+MASAdditions.m in Sources */,
 				37FD644B1E24BD9F00FE65E3 /* CDKeyboardManager.m in Sources */,
@@ -787,11 +817,14 @@
 				370BEB411E273445002B9C25 /* CDSearchBarView.m in Sources */,
 				37F064D11E20DD2000653D2E /* CDTabBarController.m in Sources */,
 				37F064FB1E20E00600653D2E /* MASConstraintMaker.m in Sources */,
+				370BEB591E27AD5C002B9C25 /* CDLoginButtonCell.m in Sources */,
 				37F065011E20E00600653D2E /* View+MASAdditions.m in Sources */,
 				37FFFA491E232905006E35DD /* CDButton.m in Sources */,
 				370F8B601E26574100D0DB23 /* CDHeaderCell.m in Sources */,
 				370F8B3C1E25DCCE00D0DB23 /* CDResourceTable.m in Sources */,
+				370BEB4B1E27A031002B9C25 /* CDLoginViewController.m in Sources */,
 				37F064DB1E20DEFF00653D2E /* CDTabBarView.m in Sources */,
+				370BEB511E27A434002B9C25 /* CDLoginInputCell.m in Sources */,
 				3713A6561E2374BC00E88A3F /* CDNoteItemCell.m in Sources */,
 				370F8B491E2602D000D0DB23 /* CDBaseTable.m in Sources */,
 				37F064FA1E20E00600653D2E /* MASConstraint.m in Sources */,
@@ -817,6 +850,7 @@
 				37FD642B1E24799200FE65E3 /* CDInputCollectionCell.m in Sources */,
 				37F065021E20E00600653D2E /* ViewController+MASAdditions.m in Sources */,
 				3713A6411E233FF300E88A3F /* CDFilterSelectView.m in Sources */,
+				370BEB4E1E27A266002B9C25 /* CDLoginHeaderCell.m in Sources */,
 				3713A6521E236E0A00E88A3F /* CDBaseTableViewCell.m in Sources */,
 				37F065191E20E74400653D2E /* CDHomeViewController.m in Sources */,
 				370BEB441E278FFC002B9C25 /* CDNoteDetailsViewController.m in Sources */,

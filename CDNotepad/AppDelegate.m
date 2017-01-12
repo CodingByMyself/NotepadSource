@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "XHSoundRecorder.h"
+#import "CDLoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -23,7 +24,10 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [CDTabBarController sharedTabBarController];
+    
+    CDLoginViewController *loginController = [[CDLoginViewController alloc] init];
+    self.window.rootViewController = [[CDNavigationController alloc] initWithRootViewController:loginController];
+//    self.window.rootViewController = [CDTabBarController sharedTabBarController];
     
     [self.window makeKeyAndVisible];
     return YES;
