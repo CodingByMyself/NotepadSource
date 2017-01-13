@@ -33,28 +33,6 @@
     // 设置代理
     self.tableViewRegister.delegate = self;
     self.tableViewRegister.dataSource = self;
-    
-    
-    // 设置footer view
-//    UIView *viewBg = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0, SCREEN_WIDTH, 80.0)];
-//    
-//    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0, SCREEN_WIDTH/2.0, 30.0)];
-//    button.tag = 1;
-//    button.center =CGPointMake(SCREEN_WIDTH/2.0, 15.0);
-//    [button setTitle:@"注 册" forState:UIControlStateNormal];
-//    button.backgroundColor = MainColor;
-//    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    button.layer.cornerRadius = 5.0f;
-//    [viewBg addSubview:button];
-//    [button mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(viewBg).offset(30.0);
-//        make.right.equalTo(viewBg).offset(-30.0);
-//        make.centerY.equalTo(viewBg);
-//        make.height.equalTo(@40.0);
-//    }];
-//    
-//    
-//    self.tableViewRegister.tableFooterView = viewBg;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -82,6 +60,8 @@
         [self showTipsViewText:@"用户名已存在，请修改后重试" delayTime:1.0];
         return;
     }
+    
+    [self.view endEditing:YES];
     
     // 插入用户表
     CDUserModel *user = [[CDUserModel alloc] init];
@@ -149,7 +129,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 0) {
-        return 200.0;
+        return 130.0;
     } else if([indexPath section] == 1) {
         return 50.0;
     } else {

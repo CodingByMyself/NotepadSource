@@ -55,6 +55,8 @@
             return;
         }
         
+        [self.view endEditing:YES];
+        
         // 准备登录
         CDUserModel *loginUser = [CDUserModel loginByUserName:[CDTools stringByTrimmingCharacters:_textFieldInput[0].text] andUserPassword:[CDTools stringByTrimmingCharacters:_textFieldInput[1].text]];
         if (loginUser.userId > 0) {

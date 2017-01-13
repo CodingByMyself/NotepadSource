@@ -33,9 +33,10 @@
         [self addSubview:_imageViewIcon];
         [_imageViewIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self);
-            make.centerY.equalTo(self);
-            make.width.equalTo(@180.0);
-            make.height.equalTo(_imageViewIcon.mas_width);
+            make.top.equalTo(self);
+            make.bottom.equalTo(self);
+//            make.width.equalTo(@180.0);
+            make.width.equalTo(_imageViewIcon.mas_height);
         }];
         
     }

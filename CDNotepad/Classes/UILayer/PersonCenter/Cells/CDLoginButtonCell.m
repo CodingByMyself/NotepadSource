@@ -44,6 +44,11 @@
         // 注册
         _registerButton.hidden = YES;
         [self.buttonLogin setTitle:@"注 册" forState:UIControlStateNormal];
+    } else if (type == 2) {
+        // 退出登录
+        _registerButton.hidden = YES;
+        [self.buttonLogin setTitle:@"退出登录" forState:UIControlStateNormal];
+        self.buttonLogin.backgroundColor = [UIColor redColor];
     }
 }
 
