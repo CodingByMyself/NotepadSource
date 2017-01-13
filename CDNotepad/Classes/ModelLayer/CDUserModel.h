@@ -17,6 +17,11 @@
 @property (nonatomic,retain) NSString *nickName; // 用户昵称
 
 
+
+
+
++ (BOOL)updateCurrentLoginUserInfo;
+
 #pragma mark - 数据库操作
 - (BOOL)insertTable;
 + (CDUserModel *)loginByUserName:(NSString *)name andUserPassword:(NSString *)password;

@@ -27,6 +27,8 @@
 
 @property (nonatomic,strong) CDSearchBarView *searchView;
 
+@property (nonatomic,strong) UIView *viewEmpty;
+
 @end
 
 @implementation CDHomeViewController
@@ -237,6 +239,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (self.notesArray.count == 0) {
+        [self.view addSubview:self.viewEmpty];
+        [self.viewEmpty mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view);
+            make.right.equalTo(self.view);
+            make.top.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+    } else {
+        [self.viewEmpty removeFromSuperview];
+    }
     return self.notesArray.count;
 }
 
@@ -381,6 +394,28 @@
         
     }
     return _searchView;
+}
+
+- (UIView *)viewEmpty
+{
+    if (_viewEmpty == nil) {
+        _viewEmpty = [[UIView alloc] init];
+        _viewEmpty.backgroundColor = [UIColor clearColor];
+        
+        UILabel *title = [[UILabel alloc] init];
+        title.textColor = COLOR_TITLE2;
+        title.font = UIFONT_14;
+        title.textAlignment = NSTextAlignmentCenter;
+        title.text = @"暂时木有数据哦~";
+        [_viewEmpty addSubview:title];
+        [title mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_viewEmpty);
+            make.right.equalTo(_viewEmpty);
+            make.top.equalTo(_viewEmpty);
+            make.bottom.equalTo(_viewEmpty).offset(-200.0);
+        }];
+    }
+    return _viewEmpty;
 }
 
 @end

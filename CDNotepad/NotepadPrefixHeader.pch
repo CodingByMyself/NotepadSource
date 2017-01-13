@@ -37,6 +37,7 @@
 #define FontBoldSystem(textSize)  [UIFont boldSystemFontOfSize:(textSize)];
 
 
+#define CDLoginedUserIDKey @"CurrentLoginedUserId"
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
 /**

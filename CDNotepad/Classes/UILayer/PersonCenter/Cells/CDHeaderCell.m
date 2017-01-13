@@ -18,7 +18,7 @@
 - (void)setup
 {
     self.imageViewHeader.image = [UIImage imageNamed:@"test_picture"];
-    self.labelName.text = @"di.chen";
+    self.labelName.text = [[[CDSharedDataManager shareManager] currentUser] name];
 }
 
 #pragma mark - Getter Method
@@ -47,7 +47,7 @@
 {
     if (_labelName == nil) {
         _labelName = [[UILabel alloc] init];
-        _labelName.text = @"di.chen";
+        _labelName.text = [[[CDSharedDataManager shareManager] currentUser] name];
         _labelName.textColor = COLOR_TITLE1;
         _labelName.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_labelName];

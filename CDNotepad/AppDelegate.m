@@ -26,9 +26,12 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [CDTabBarController sharedTabBarController];
     
-    CDLoginViewController *loginController = [[CDLoginViewController alloc] init];
-    self.window.rootViewController = [[CDNavigationController alloc] initWithRootViewController:loginController];
-//    self.window.rootViewController = [CDTabBarController sharedTabBarController];
+    if ([CDUserModel updateCurrentLoginUserInfo]) {
+        self.window.rootViewController = [CDTabBarController sharedTabBarController];
+    } else {
+        CDLoginViewController *loginController = [[CDLoginViewController alloc] init];
+        self.window.rootViewController = [[CDNavigationController alloc] initWithRootViewController:loginController];
+    }
     
     [self.window makeKeyAndVisible];
     return YES;

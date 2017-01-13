@@ -12,7 +12,32 @@
 
 @implementation CDUserModel
 
-
++ (BOOL)updateCurrentLoginUserInfo
+{
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:CDLoginedUserIDKey] isKindOfClass:[NSNumber class]]) {
+        NSInteger userId = [[[NSUserDefaults standardUserDefaults] objectForKey:CDLoginedUserIDKey] integerValue];
+        if (userId > 0) {
+            NSString *sql = [NSString stringWithFormat:@"rm_id = %zi",userId];
+            if ([CDRealmTableManager queryObjectListByCondition:sql fromClassName:[CDUserTable className]].count > 0) {
+                CDUserModel *user = [[CDUserModel alloc] init];
+                CDUserTable *table = [[CDRealmTableManager queryObjectListByCondition:sql fromClassName:[CDUserTable className]] lastObject];
+                user.userId = table.rm_id;
+                user.name = table.name;
+                user.nickName = table.nick_name;
+                // 更新当前登录的用户
+                [[CDSharedDataManager shareManager] setCurrentLoginUser:user];
+                return YES;  // 已有登录用户的记录
+            } else {
+                return NO;
+            }
+            
+        } else {
+            return NO;
+        }
+    } else {
+        return NO;
+    }
+}
 
 #pragma mark - 数据库操作
 - (BOOL)insertTable
@@ -51,6 +76,7 @@
         user.userId = table.rm_id;
         user.name = table.name;
         user.nickName = table.nick_name;
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:user.userId] forKey:CDLoginedUserIDKey];
         return user;
     } else {
         user.userId = -1;

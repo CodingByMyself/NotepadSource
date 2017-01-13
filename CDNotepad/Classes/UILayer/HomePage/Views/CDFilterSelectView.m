@@ -43,6 +43,15 @@
     self.tableViewList.dataSource = self;
 }
 
+- (void)setHidden:(BOOL)hidden
+{
+    [super setHidden:hidden];
+    [self.superview bringSubviewToFront:self];
+    if (hidden == NO) {
+        [self.tableViewList reloadData];
+    }
+}
+
 #pragma mark - TableView Delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
