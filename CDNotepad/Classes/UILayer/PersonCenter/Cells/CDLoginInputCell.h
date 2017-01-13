@@ -10,4 +10,8 @@
 
 @interface CDLoginInputCell : CDBaseTableViewCell
 
+@property (nonatomic,readonly) UITextField *textField;
+
+- (void)setInputType:(NSInteger)type;
+
 @end

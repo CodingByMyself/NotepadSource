@@ -14,6 +14,9 @@
 #import "AppDelegate.h"
 
 @interface CDLoginViewController () <UITableViewDelegate ,UITableViewDataSource,CDKeyboardManagerDelegate>
+{
+    UITextField *_textFieldInput[2];
+}
 @property (nonatomic,strong) UITableView *tableViewLogin;
 @end
 
@@ -41,8 +44,31 @@
 {
     if (button.tag == 1) {
         // 登录
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        appDelegate.window.rootViewController = [CDTabBarController sharedTabBarController];
+        if ([CDTools stringByTrimmingCharacters:_textFieldInput[0].text].length <= 0) {
+            [self showTipsViewText:@"请输入用户名" delayTime:1.0];
+            return;
+        } else if ([CDTools validateIsOnlyNumberOrLetter:[CDTools stringByTrimmingCharacters:_textFieldInput[0].text]] == NO) {
+            [self showTipsViewText:@"用户名仅支持输入字母或数字" delayTime:1.0];
+            return;
+        } else if ([CDTools stringByTrimmingCharacters:_textFieldInput[1].text].length <= 0) {
+            [self showTipsViewText:@"请输入密码" delayTime:1.0];
+            return;
+        }
+        
+        // 准备登录
+        CDUserModel *loginUser = [CDUserModel loginByUserName:[CDTools stringByTrimmingCharacters:_textFieldInput[0].text] andUserPassword:[CDTools stringByTrimmingCharacters:_textFieldInput[1].text]];
+        if (loginUser.userId > 0) {
+            [[CDSharedDataManager shareManager] setCurrentLoginUser:loginUser];
+            [self showTipsViewText:@"恭喜您，登录成功" delayTime:1.0];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                appDelegate.window.rootViewController = [CDTabBarController sharedTabBarController];
+            });
+        } else if (loginUser.userId == -1){
+            [self showTipsViewText:@"用户名或密码不正确" delayTime:1.0];
+        } else if (loginUser.userId == -2) {
+            [self showTipsViewText:@"用户不存在" delayTime:1.0];
+        }
         
     } else if (button.tag == 2) {
         // 注册
@@ -75,6 +101,11 @@
     }];
 }
 
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
 #pragma mark - TableView Delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -89,13 +120,15 @@
         case 1:
         {
             CDLoginInputCell *loginCell = [[CDLoginInputCell alloc] initWithRestorationIdentifier:@"CDLoginInputCell" onTableView:tableView selectionStyle:UITableViewCellSelectionStyleNone];
-            
+            [loginCell setInputType:indexPath.row];
+            _textFieldInput[indexPath.row] = loginCell.textField;
             return loginCell;
         }
             break;
         case 2:
         {
             CDLoginButtonCell *buttonCell = [[CDLoginButtonCell alloc] initWithRestorationIdentifier:@"CDLoginButtonCell" onTableView:tableView selectionStyle:UITableViewCellSelectionStyleNone];
+            [buttonCell setButtonType:0];
             [buttonCell setButtonAction:@selector(loginButtonClickedEvent:) andTarget:self];
             return buttonCell;
         }
@@ -108,7 +141,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [self.view endEditing:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

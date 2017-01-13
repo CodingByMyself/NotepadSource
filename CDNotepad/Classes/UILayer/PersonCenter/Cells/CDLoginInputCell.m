@@ -12,18 +12,46 @@
 @interface CDLoginInputCell ()
 @property (nonatomic,strong) UIView *viewBg;
 @property (nonatomic,strong) UIImageView *imageViewIcon;
-@property (nonatomic,strong) UITextField *textField;
+//@property (nonatomic,strong) UITextField *textField;
 
 @end
 
 
 @implementation CDLoginInputCell
+@synthesize textField = _textField;
 
 - (void)setup
 {
     self.viewBg.backgroundColor = [UIColor whiteColor];
     self.imageViewIcon.image = [UIImage imageNamed:@"login_page_user_name_icon"];
     self.textField.text = @"";
+}
+
+- (void)setInputType:(NSInteger)type
+{
+    switch (type) {
+        case 0:
+        {
+            self.textField.placeholder = @"请输入用户名";
+            self.textField.secureTextEntry = NO;
+//            self.textField.keyboardType
+        }
+            break;
+        case 1:
+        {
+            self.textField.placeholder = @"请输入密码";
+            self.textField.secureTextEntry = YES;
+        }
+            break;
+        case 2:
+        {
+            self.textField.placeholder = @"请输入确认密码";
+            self.textField.secureTextEntry = YES;
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - Getter Method

@@ -79,6 +79,7 @@
 #import "CDNavigationController.h"
 #import "CDBaseViewController.h"
 #import "CDBaseTableViewCell.h"
+#import "CDSharedDataManager.h"
 
 #import <Realm/Realm.h>
 #import "CDTools.h"

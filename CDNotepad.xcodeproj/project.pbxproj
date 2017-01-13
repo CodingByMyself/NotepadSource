@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370077061E2861E1007029FB /* CDUserTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 370077051E2861E1007029FB /* CDUserTable.m */; };
+		370077091E28625E007029FB /* CDUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 370077081E28625E007029FB /* CDUserModel.m */; };
+		3700770C1E28B731007029FB /* CDSharedDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3700770B1E28B731007029FB /* CDSharedDataManager.m */; };
 		370BEB3E1E270F06002B9C25 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 370BEB3D1E270F06002B9C25 /* Realm.framework */; };
 		370BEB411E273445002B9C25 /* CDSearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BEB401E273445002B9C25 /* CDSearchBarView.m */; };
 		370BEB441E278FFC002B9C25 /* CDNoteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370BEB431E278FFC002B9C25 /* CDNoteDetailsViewController.m */; };
@@ -122,6 +125,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		370077041E2861E1007029FB /* CDUserTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDUserTable.h; sourceTree = "<group>"; };
+		370077051E2861E1007029FB /* CDUserTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDUserTable.m; sourceTree = "<group>"; };
+		370077071E28625E007029FB /* CDUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDUserModel.h; sourceTree = "<group>"; };
+		370077081E28625E007029FB /* CDUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDUserModel.m; sourceTree = "<group>"; };
+		3700770A1E28B731007029FB /* CDSharedDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSharedDataManager.h; sourceTree = "<group>"; };
+		3700770B1E28B731007029FB /* CDSharedDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDSharedDataManager.m; sourceTree = "<group>"; };
 		370BEB3D1E270F06002B9C25 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		370BEB3F1E273445002B9C25 /* CDSearchBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSearchBarView.h; sourceTree = "<group>"; };
 		370BEB401E273445002B9C25 /* CDSearchBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDSearchBarView.m; sourceTree = "<group>"; };
@@ -334,6 +343,10 @@
 				370F8B311E25DAE100D0DB23 /* CDBaseObject.m */,
 				370F8B321E25DAE100D0DB23 /* CDNoteModel.h */,
 				370F8B331E25DAE100D0DB23 /* CDNoteModel.m */,
+				370077071E28625E007029FB /* CDUserModel.h */,
+				370077081E28625E007029FB /* CDUserModel.m */,
+				3700770A1E28B731007029FB /* CDSharedDataManager.h */,
+				3700770B1E28B731007029FB /* CDSharedDataManager.m */,
 			);
 			path = ModelLayer;
 			sourceTree = "<group>";
@@ -343,6 +356,8 @@
 			children = (
 				370F8B3D1E25DFC800D0DB23 /* CDRealmTableManager.h */,
 				370F8B3E1E25DFC800D0DB23 /* CDRealmTableManager.m */,
+				370077041E2861E1007029FB /* CDUserTable.h */,
+				370077051E2861E1007029FB /* CDUserTable.m */,
 				370F8B371E25DB8400D0DB23 /* CDNoteTable.h */,
 				370F8B381E25DB8400D0DB23 /* CDNoteTable.m */,
 				370F8B3A1E25DCCE00D0DB23 /* CDResourceTable.h */,
@@ -809,6 +824,7 @@
 				370BEB561E27AB23002B9C25 /* CDRegisterViewController.m in Sources */,
 				370F8B391E25DB8400D0DB23 /* CDNoteTable.m in Sources */,
 				37F064FF1E20E00600653D2E /* NSArray+MASAdditions.m in Sources */,
+				3700770C1E28B731007029FB /* CDSharedDataManager.m in Sources */,
 				37FD644B1E24BD9F00FE65E3 /* CDKeyboardManager.m in Sources */,
 				37F064FE1E20E00600653D2E /* MASViewConstraint.m in Sources */,
 				3713A65F1E238C4D00E88A3F /* CDDateHelper.m in Sources */,
@@ -840,6 +856,7 @@
 				370F8B561E2636BF00D0DB23 /* CDAlertObject.m in Sources */,
 				37FD644E1E24C35700FE65E3 /* CDVoiceCollectionCell.m in Sources */,
 				37F065001E20E00600653D2E /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				370077061E2861E1007029FB /* CDUserTable.m in Sources */,
 				37F064DE1E20DF7700653D2E /* CDBarItem.m in Sources */,
 				370F8B341E25DAE100D0DB23 /* CDBaseObject.m in Sources */,
 				37F064F91E20E00600653D2E /* MASCompositeConstraint.m in Sources */,
@@ -850,6 +867,7 @@
 				37FD642B1E24799200FE65E3 /* CDInputCollectionCell.m in Sources */,
 				37F065021E20E00600653D2E /* ViewController+MASAdditions.m in Sources */,
 				3713A6411E233FF300E88A3F /* CDFilterSelectView.m in Sources */,
+				370077091E28625E007029FB /* CDUserModel.m in Sources */,
 				370BEB4E1E27A266002B9C25 /* CDLoginHeaderCell.m in Sources */,
 				3713A6521E236E0A00E88A3F /* CDBaseTableViewCell.m in Sources */,
 				37F065191E20E74400653D2E /* CDHomeViewController.m in Sources */,

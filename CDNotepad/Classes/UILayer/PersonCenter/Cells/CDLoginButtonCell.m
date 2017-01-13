@@ -33,6 +33,20 @@
     _registerButton.tag = 2;
 }
 
+- (void)setButtonType:(NSInteger)type
+{
+    if (type == 0) {
+        // 登录
+        _registerButton.hidden = NO;
+        [self.buttonLogin setTitle:@"登 录" forState:UIControlStateNormal];
+        
+    } else if (type == 1) {
+        // 注册
+        _registerButton.hidden = YES;
+        [self.buttonLogin setTitle:@"注 册" forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - Getter Method
 - (UIButton *)buttonLogin
 {

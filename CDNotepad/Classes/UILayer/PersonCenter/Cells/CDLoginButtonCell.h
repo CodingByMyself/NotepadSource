@@ -12,4 +12,6 @@
 
 - (void)setButtonAction:(SEL)action andTarget:(id)target;
 
+- (void)setButtonType:(NSInteger)type;
+
 @end
