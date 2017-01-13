@@ -9,7 +9,11 @@
 
 @interface CDNoteTable : CDBaseTable
 
+
 @property BOOL note_mark; // 是否被标记
+
+@property NSInteger user_id; // 所属用户id
+
 @property NSString *note_content; // 笔记文本内容
 @property NSString *note_create_date;  // 笔记创建时间 存储格式为：“yyyyMMddHHmmss”
 

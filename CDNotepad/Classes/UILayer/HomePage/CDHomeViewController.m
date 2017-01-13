@@ -48,7 +48,6 @@
     // title设置
     [self initTitleView];
     
-    
     self.tableViewNotes.delegate = self;
     self.tableViewNotes.dataSource = self;
     
@@ -57,6 +56,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController.navigationBar layoutIfNeeded];
     
     [[CDKeyboardManager sharedKeyboard] setEventDelegate:self];
     
@@ -293,7 +293,7 @@
 {
     if (self.searchView.textField == textField) {
         NSString *searchKeyword = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        NSString *sql = [NSString stringWithFormat:@"note_content CONTAINS \"%@\"",searchKeyword];
+        NSString *sql = [NSString stringWithFormat:@"user_id = %zi and note_content CONTAINS \"%@\"",[[[CDSharedDataManager shareManager] currentUser] userId],searchKeyword];
         NSArray *result = [CDNoteModel queryObjectByCondition:sql];
         self.notesArray = [NSMutableArray arrayWithArray:result];
         [self.tableViewNotes reloadData];

@@ -24,6 +24,7 @@
         
         /****** 生成NoteTable表模型 *******/
         CDNoteTable *noteTable = [[CDNoteTable alloc] init];
+        noteTable.user_id = [[[CDSharedDataManager shareManager] currentUser] userId];
         noteTable.note_content = noteModel.title;
         noteTable.note_create_date = [CDDateHelper date:noteModel.createDate toStringByFormat:@"yyyyMMddHHmmss"];
         
@@ -57,7 +58,8 @@
 {
     NSMutableArray *temp = [[NSMutableArray alloc] init];
     
-    RLMResults *allNoteList = [CDRealmTableManager queryObjectListByCondition:nil fromClassName:[CDNoteTable className]];
+    NSString *sql = [NSString stringWithFormat:@"user_id = %zi",[[[CDSharedDataManager shareManager] currentUser] userId]];
+    RLMResults *allNoteList = [CDRealmTableManager queryObjectListByCondition:sql fromClassName:[CDNoteTable className]];
     for (CDNoteTable *noteTable in allNoteList) {
         CDNoteModel *model = [[CDNoteModel alloc] init];
         model.noteId = noteTable.rm_id;

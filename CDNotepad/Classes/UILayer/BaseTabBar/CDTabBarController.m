@@ -12,6 +12,7 @@
 #import "CDHomeViewController.h"
 #import "CDMineViewController.h"
 
+static CDTabBarController *_sharedTabBarController = nil;
 
 @interface CDTabBarController () <UINavigationControllerDelegate>
 @property (strong, nonatomic) CDTabBarView *bottomTabBarView;
@@ -28,12 +29,17 @@
  */
 + (instancetype)sharedTabBarController
 {
-    static CDTabBarController *_sharedTabBarController = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedTabBarController = [[CDTabBarController alloc] init];
     });
     return _sharedTabBarController;
+}
+
++ (void)resetTabBar
+{
+    [[CDTabBarController sharedTabBarController] setupViewControllers];  //  装载控制器
+    [[CDTabBarController sharedTabBarController].bottomTabBarView setSelectedItemIndex:0];
 }
 
 #pragma mark - view

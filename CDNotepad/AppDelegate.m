@@ -24,6 +24,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    [CDTabBarController sharedTabBarController];
     
     CDLoginViewController *loginController = [[CDLoginViewController alloc] init];
     self.window.rootViewController = [[CDNavigationController alloc] initWithRootViewController:loginController];

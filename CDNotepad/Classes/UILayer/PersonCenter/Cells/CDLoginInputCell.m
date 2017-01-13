@@ -100,6 +100,7 @@
         _textField.placeholder = @"请输入用户名";
         _textField.font = UIFONT_14;
         _textField.textColor = COLOR_TITLE2;
+        _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         
         [self.viewBg addSubview:_textField];
         [_textField mas_makeConstraints:^(MASConstraintMaker *make) {

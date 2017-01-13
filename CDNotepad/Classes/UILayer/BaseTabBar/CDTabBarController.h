@@ -27,6 +27,7 @@
  *  @return 底部导航控制器的单实例
  */
 + (instancetype)sharedTabBarController;
++ (void)resetTabBar;
 
 #pragma mark - 隐藏 底部标签导航
 /**

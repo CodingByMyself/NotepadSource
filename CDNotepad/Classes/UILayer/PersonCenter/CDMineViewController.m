@@ -55,9 +55,13 @@
 {
     CDAlertObject *alertView = [CDAlertObject alertPreferredStyle:CDAlertObjectStyleAlert withTitle:@"提示" message:@"确定要退出当前账户吗？" cancelButtonTitle:@"点错啦" otherButtonTitles:@[@"确定"] eventOfClickedBlock:^(NSInteger indexClick) {
         if (indexClick == 1) {
-            CDLoginViewController *loginController = [[CDLoginViewController alloc] init];
-            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            appDelegate.window.rootViewController = [[CDNavigationController alloc] initWithRootViewController:loginController];
+            [self showTipsViewText:@"成功退出登录" delayTime:1.0];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                CDLoginViewController *loginController = [[CDLoginViewController alloc] init];
+                AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                appDelegate.window.rootViewController = [[CDNavigationController alloc] initWithRootViewController:loginController];
+                [CDTabBarController resetTabBar];
+            });
         }
     }];
     [alertView showAlert];
