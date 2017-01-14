@@ -11,6 +11,7 @@
 #import "CDVoiceCollectionCell.h"
 #import "CDPictureCollectionCell.h"
 #import "CDAddAttachmentMenuView.h"
+#import "CDSelectPictureViewController.h"
 #import "CDNoteModel.h"
 
 @interface CDAddOrEditNoteViewController () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,CDKeyboardManagerDelegate,CDAddAttachmentMenuViewDelegate>
@@ -138,6 +139,9 @@
 {
     NSLog(@"选择图片");
     [self.collectionViewAdd reloadData];
+    
+    CDSelectPictureViewController *selectedPicture = [[CDSelectPictureViewController alloc] init];
+    [self.navigationController pushViewController:selectedPicture animated:YES];
 }
 
 - (void)menuView:(CDAddAttachmentMenuView *)menuView makeVoiceFinishedOnFilePath:(NSString *)filePath

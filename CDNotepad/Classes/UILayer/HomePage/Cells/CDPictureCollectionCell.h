@@ -10,4 +10,8 @@
 
 @interface CDPictureCollectionCell : UICollectionViewCell
 
+
+- (void)setImage:(UIImage *)image andButtonImage:(UIImage *)imageButton;
+- (void)updateButtonImage:(UIImage *)image;
+
 @end

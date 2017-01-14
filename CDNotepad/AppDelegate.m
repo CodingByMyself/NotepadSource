@@ -20,7 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [[XHSoundRecorder sharedSoundRecorder] stopRecorder];
+    [[XHSoundRecorder sharedSoundRecorder] stopRecorder]; // 初始化录音
+    [CDPhotoManager sharePhotos];  // 初始化相册
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];

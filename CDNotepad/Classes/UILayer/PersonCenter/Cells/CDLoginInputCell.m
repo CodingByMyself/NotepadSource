@@ -34,19 +34,21 @@
         {
             self.textField.placeholder = @"请输入用户名";
             self.textField.secureTextEntry = NO;
-//            self.textField.keyboardType
+            self.imageViewIcon.image = [UIImage imageNamed:@"login_page_user_name_icon"];
         }
             break;
         case 1:
         {
             self.textField.placeholder = @"请输入密码";
             self.textField.secureTextEntry = YES;
+            self.imageViewIcon.image = [UIImage imageNamed:@"login_page_user_password_icon"];
         }
             break;
         case 2:
         {
             self.textField.placeholder = @"请输入确认密码";
             self.textField.secureTextEntry = YES;
+            self.imageViewIcon.image = [UIImage imageNamed:@"login_page_user_password_icon"];
         }
             break;
         default:
