@@ -13,8 +13,9 @@
 #import "CDAddAttachmentMenuView.h"
 #import "CDSelectPictureViewController.h"
 #import "CDNoteModel.h"
+#import "XHSoundRecorder.h"
 
-@interface CDAddOrEditNoteViewController () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,CDKeyboardManagerDelegate,CDAddAttachmentMenuViewDelegate>
+@interface CDAddOrEditNoteViewController () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,CDKeyboardManagerDelegate,CDAddAttachmentMenuViewDelegate,CDPictureCollectionCellDelegate>
 {
     NSInteger _type;
     CDNoteModel *_currentNode;
@@ -81,6 +82,12 @@
     [super viewWillAppear:animated];
     // 设置键盘事件代理
     [[CDKeyboardManager sharedKeyboard] setEventDelegate:self];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[XHSoundRecorder sharedSoundRecorder] stopRecorder];
 }
 
 - (void)updateTitleViewByNewDate:(NSDate *)date
@@ -172,6 +179,14 @@
     [self updateTitleViewByNewDate:selectedDate];
 }
 
+#pragma mark - CDPictureCollectionCell Delegate
+- (void)collectionPictiureCell:(CDPictureCollectionCell *)cell buttonClicked:(UIButton *)button
+{
+    NSInteger index = [[self.collectionViewAdd indexPathForCell:cell] row];
+    [_currentNode.picturePathList removeObjectAtIndex:index];
+    [self.collectionViewAdd reloadData];
+}
+
 #pragma mark 键盘事件
 - (void)keyboardWillShowEventByUserInfo:(NSDictionary *)userInfo
 {
@@ -241,7 +256,7 @@
             // 图片
             [self.collectionViewAdd registerClass:[CDPictureCollectionCell class] forCellWithReuseIdentifier:@"CDPictureCollectionCell"];
             CDPictureCollectionCell * cell = (CDPictureCollectionCell *)[self.collectionViewAdd dequeueReusableCellWithReuseIdentifier:@"CDPictureCollectionCell" forIndexPath:indexPath];
-            
+            cell.delegate = self;
             NSString *filePath = [[CDTools getSandboxPath] stringByAppendingString:[_currentNode.picturePathList objectAtIndex:indexPath.row]];
             NSLog(@"展示路径：%@",filePath);
             [cell setImage:[UIImage imageWithContentsOfFile:filePath] andButtonImage:[UIImage imageNamed:@"new_or_edit_delete_attachment_icon"]];

@@ -145,7 +145,7 @@
     UIScreen *screen = [UIScreen mainScreen];
     CGFloat scale = screen.scale;
     // Sizing is very rough... more thought required in a real implementation
-    CGFloat imageSize = MAX(screen.bounds.size.width, screen.bounds.size.height) * 1.5;
+    CGFloat imageSize = MAX(screen.bounds.size.width, screen.bounds.size.height) * 1.0;
     CGSize imageTargetSize = CGSizeMake(imageSize * scale, imageSize * scale);
     // 按指定尺寸生成图片
     PHImageRequestID id_num = [imageManager requestImageForAsset:asset targetSize:imageTargetSize contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {

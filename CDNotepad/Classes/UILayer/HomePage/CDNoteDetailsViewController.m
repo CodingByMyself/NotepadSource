@@ -226,7 +226,7 @@
         case 2:
         {
             // 图片
-            CGFloat width = collectionView.cd_width/3.0 - 5.0;
+            CGFloat width = collectionView.cd_width/3.0- 0.5;
             size = CGSizeMake(width, width);
         }
             break;
@@ -274,12 +274,12 @@
 #pragma mark  Item  Spacing
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 1.0;
+    return 5.0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 1.0;
+    return 0;
 }
 
 #pragma mark - Getter Method

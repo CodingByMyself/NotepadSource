@@ -107,9 +107,10 @@ const CGFloat AddAttachmentMenuHeight = 45.0;
         case 2:
         {
             NSLog(@"开始录音");
-            if (self.cd_height > AddAttachmentMenuHeight) {
+            if (self.cd_height > AddAttachmentMenuHeight && [self.subviews containsObject:_makeVoiceView]) {
                 return;
             }
+            [_picker hiddenPickerView];
             
             [[XHSoundRecorder sharedSoundRecorder] startRecorder:^(NSString *filePath) {
                 NSLog(@"录音文件全路径:%@",filePath);
@@ -147,6 +148,9 @@ const CGFloat AddAttachmentMenuHeight = 45.0;
 #pragma mark  显示日期和时间的选择器
 - (void)showPickerDateView:(UIButton *)button
 {
+    [self buttonOverClickedEvent:nil];
+    
+    [_picker hiddenPickerView];
     if (button.tag == 1) {
         if (self.cd_height > AddAttachmentMenuHeight && _picker.showConentType == 0) {
             return;
@@ -204,6 +208,7 @@ const CGFloat AddAttachmentMenuHeight = 45.0;
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(AddAttachmentMenuHeight));
     }];
+    [self layoutIfNeeded];
 }
 
 #pragma mark - Getter Method

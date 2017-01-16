@@ -21,7 +21,9 @@
 - (void)setImage:(UIImage *)image andButtonImage:(UIImage *)imageButton
 {
     self.imageViewPicture.image = image;
-    [self.buttonSelected setImage:imageButton forState:UIControlStateNormal];
+    
+    UIImageView *imageview = [self.buttonSelected viewWithTag:1];
+    imageview.image = imageButton;
 //    if (selected) {
 //        [self.buttonSelected setImage:[UIImage imageNamed:@"photo_image_selected_on_status_icon"] forState:UIControlStateNormal];
 //    } else {
@@ -31,7 +33,17 @@
 
 - (void)updateButtonImage:(UIImage *)image
 {
-    [self.buttonSelected setImage:image forState:UIControlStateNormal];
+    UIImageView *imageview = [self.buttonSelected viewWithTag:1];
+    imageview.image = image;
+}
+
+
+#pragma mark - IBAction
+- (void)buttonClickedEvent:(UIButton *)button
+{
+    if ([self.delegate respondsToSelector:@selector(collectionPictiureCell:buttonClicked:)]) {
+        [self.delegate collectionPictiureCell:self buttonClicked:_buttonSelected];
+    }
 }
 
 #pragma mark - Getter Method
@@ -58,7 +70,7 @@
     if (_buttonSelected == nil) {
         _buttonSelected =[[UIButton alloc] init];
         _buttonSelected.clipsToBounds = YES;
-//        _buttonSelected.backgroundColor = [UIColor yellowColor];
+        [_buttonSelected addTarget:self action:@selector(buttonClickedEvent:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_buttonSelected];
         [_buttonSelected mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self);
@@ -67,11 +79,16 @@
             make.width.equalTo(_buttonSelected.mas_height);
         }];
         
-        [_buttonSelected.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(_buttonSelected.mas_centerX).offset(15.0);
-            make.centerY.equalTo(_buttonSelected.mas_centerY).offset(-5.0);
+        UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.clipsToBounds = YES;
+        imageView.tag = 1;
+        [_buttonSelected addSubview:imageView];
+        [imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(_buttonSelected.mas_centerX).offset(7.0);
+            make.centerY.equalTo(_buttonSelected.mas_centerY).offset(-7.0);
             make.height.equalTo(@(SCREEN_WIDTH/3.0/3.0/3.0*1.2));
-            make.width.equalTo(_buttonSelected.imageView.mas_height);
+            make.width.equalTo(imageView.mas_height);
         }];
         
     }
