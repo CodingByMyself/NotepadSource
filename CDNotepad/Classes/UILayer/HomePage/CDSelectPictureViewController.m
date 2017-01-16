@@ -9,7 +9,7 @@
 #import "CDSelectPictureViewController.h"
 #import "CDPictureCollectionCell.h"
 
-@interface CDSelectPictureViewController () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface CDSelectPictureViewController () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,CDPictureCollectionCellDelegate>
 
 @property (nonatomic,strong) NSMutableArray <PHAsset *>* selectedList;
 @property (nonatomic,strong) UICollectionView *collectionViewPhoto;
@@ -78,7 +78,7 @@
     // 图片
     [self.collectionViewPhoto registerClass:[CDPictureCollectionCell class] forCellWithReuseIdentifier:@"CDPictureCollectionCell"];
     __block CDPictureCollectionCell * cell = (CDPictureCollectionCell *)[self.collectionViewPhoto dequeueReusableCellWithReuseIdentifier:@"CDPictureCollectionCell" forIndexPath:indexPath];
-    
+    cell.delegate = self;
     PHAsset *asset = [[[CDPhotoManager sharePhotos] assets] objectAtIndex:indexPath.row];
     
     UIImage *buttonImage = [_selectedList containsObject:asset] ? [UIImage imageNamed:@"photo_image_selected_on_status_icon"] : [UIImage imageNamed:@"photo_image_selected_off_status_icon"];
@@ -101,14 +101,7 @@
     
     CDPictureCollectionCell *pictureCell = (CDPictureCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
-    PHAsset *asset = [[[CDPhotoManager sharePhotos] assets] objectAtIndex:indexPath.row];
-    if ([_selectedList containsObject:asset]) {
-        [_selectedList removeObject:asset];
-        [pictureCell updateButtonImage:[UIImage imageNamed:@"photo_image_selected_off_status_icon"]];
-    } else {
-        [_selectedList addObject:asset];
-        [pictureCell updateButtonImage:[UIImage imageNamed:@"photo_image_selected_on_status_icon"]];
-    }
+    [self setSelectedCell:pictureCell];
 }
 
 #pragma mark  Item Size
@@ -116,7 +109,7 @@
 {
     CGSize size = CGSizeZero;
     // 图片
-    CGFloat width = collectionView.cd_width/3.0 - 3.0;
+    CGFloat width = collectionView.cd_width/3.0 - 0.5;
     size = CGSizeMake(width, width);
     return size;
 }
@@ -139,12 +132,34 @@
 #pragma mark  Item  Spacing
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 2.0;
+    return 5.0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 1.0;
+    return 0;
+}
+
+- (void)setSelectedCell:(CDPictureCollectionCell *)cell
+{
+    [self.view endEditing:YES];
+    
+    NSIndexPath *indexPath = [self.collectionViewPhoto indexPathForCell:cell];
+    
+    PHAsset *asset = [[[CDPhotoManager sharePhotos] assets] objectAtIndex:indexPath.row];
+    if ([_selectedList containsObject:asset]) {
+        [_selectedList removeObject:asset];
+        [cell updateButtonImage:[UIImage imageNamed:@"photo_image_selected_off_status_icon"]];
+    } else {
+        [_selectedList addObject:asset];
+        [cell updateButtonImage:[UIImage imageNamed:@"photo_image_selected_on_status_icon"]];
+    }
+}
+
+#pragma mark - CDPictureCollectionCell Delegate
+- (void)collectionPictiureCell:(CDPictureCollectionCell *)cell buttonClicked:(UIButton *)button
+{
+    [self setSelectedCell:cell];
 }
 
 #pragma mark - Getter Method
