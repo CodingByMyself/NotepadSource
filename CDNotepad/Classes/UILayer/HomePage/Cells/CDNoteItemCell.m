@@ -40,7 +40,8 @@
     self.imageViewMark.hidden = !(noteModel.mark);
     
     if (noteModel.picturePathList.count > 0) {
-        self.imageViewItem.image = [UIImage imageNamed:@"test_picture"];
+        NSString *filePath = [[CDTools getSandboxPath] stringByAppendingString:noteModel.picturePathList.firstObject];
+        self.imageViewItem.image = [UIImage imageWithContentsOfFile:filePath];
         [_imageViewItem mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView).offset(-CDScreenMarginAtLeftAndRight);
             make.top.equalTo(self.contentView).offset(5.0);
@@ -50,7 +51,7 @@
     } else {
         self.imageViewItem.image = nil;
         [self.imageViewItem mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.contentView).offset(-CDScreenMarginAtLeftAndRight);
+            make.right.equalTo(self.contentView).offset(-CDScreenMarginAtLeftAndRight-1.0);
             make.top.equalTo(self.contentView);
             make.bottom.equalTo(self.contentView);
             make.width.equalTo(@1);
@@ -75,6 +76,7 @@
     if (_imageViewItem == nil) {
         _imageViewItem = [[UIImageView alloc] init];
         _imageViewItem.contentMode = UIViewContentModeScaleAspectFill;
+        _imageViewItem.clipsToBounds = YES;
         [self.contentView addSubview:_imageViewItem];
         [_imageViewItem mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView).offset(-CDScreenMarginAtLeftAndRight);

@@ -13,7 +13,7 @@
 
 @interface CDPhotoManager : NSObject
 
-@property (nonatomic, readonly) NSMutableArray *assets;
+@property (nonatomic, strong ,readonly) NSMutableArray *assets;
 
 
 
@@ -25,8 +25,10 @@
 
 // Load from photos library
 // 生成指定相册资源的图片对象
-- (NSInteger)getImageWithAsset:(PHAsset *)asset completeNotify:(void(^)(UIImage *image))notify;
+- (NSInteger)getImageWithAsset:(PHAsset *)asset completeNotify:(void(^)(UIImage *image,NSString *shortPath))notify;
 
 // 保存指定照片到指定目录
 - (void)saveImageWithAsset:(PHAsset *)asset toSavePathDirectory:(NSString *)savePathDir completeNotify:(void(^)(BOOL saveResult,NSString *saveFullPath))notify;
+
+- (NSInteger)getShortPathWithAsset:(PHAsset *)asset completeNotify:(void(^)(NSString *shortPath))notify;
 @end

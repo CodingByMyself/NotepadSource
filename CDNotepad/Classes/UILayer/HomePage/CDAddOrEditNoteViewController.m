@@ -141,6 +141,21 @@
     [self.collectionViewAdd reloadData];
     
     CDSelectPictureViewController *selectedPicture = [[CDSelectPictureViewController alloc] init];
+    // 生成已选中的图片
+//    NSMutableArray *temp = [[NSMutableArray alloc] init];
+//    for (PHAsset *asset in [[CDPhotoManager sharePhotos] assets]) {
+//        [[CDPhotoManager sharePhotos] getImageWithAsset:asset completeNotify:^(UIImage *image, NSString *shortPath) {
+//            if ([_currentNode.picturePathList containsObject:shortPath] == NO) {
+//                [temp addObject:asset];
+//            }
+//        }];
+//    }
+    selectedPicture.oldSelectedPathList = [NSMutableArray arrayWithArray:_currentNode.picturePathList];
+    selectedPicture.selectedComplete = ^(NSArray *pathList) {
+        [_currentNode.picturePathList removeAllObjects];
+        [_currentNode.picturePathList addObjectsFromArray:pathList];
+        [self.collectionViewAdd reloadData];
+    };
     [self.navigationController pushViewController:selectedPicture animated:YES];
 }
 
@@ -227,8 +242,10 @@
             [self.collectionViewAdd registerClass:[CDPictureCollectionCell class] forCellWithReuseIdentifier:@"CDPictureCollectionCell"];
             CDPictureCollectionCell * cell = (CDPictureCollectionCell *)[self.collectionViewAdd dequeueReusableCellWithReuseIdentifier:@"CDPictureCollectionCell" forIndexPath:indexPath];
             
+            NSString *filePath = [[CDTools getSandboxPath] stringByAppendingString:[_currentNode.picturePathList objectAtIndex:indexPath.row]];
+            NSLog(@"展示路径：%@",filePath);
+            [cell setImage:[UIImage imageWithContentsOfFile:filePath] andButtonImage:[UIImage imageNamed:@"new_or_edit_delete_attachment_icon"]];
             
-            cell.backgroundColor = [UIColor greenColor];
             return cell;
         }
             break;
@@ -267,7 +284,7 @@
         case 2:
         {
             // 图片
-            CGFloat width = collectionView.cd_width/3.0 - 5.0;
+            CGFloat width = collectionView.cd_width/3.0 - 0.5;
             size = CGSizeMake(width, width);
         }
             break;
@@ -315,12 +332,12 @@
 #pragma mark  Item  Spacing
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 1.0;
+    return 5.0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 1.0;
+    return 0;
 }
 
 #pragma mark - Getter Method

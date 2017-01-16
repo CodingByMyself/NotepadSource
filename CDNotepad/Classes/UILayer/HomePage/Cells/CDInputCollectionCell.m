@@ -64,10 +64,10 @@
         _textViewInputContent.delegate = self;
         [self addSubview:_textViewInputContent];
         [_textViewInputContent mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(10.0);
-            make.right.equalTo(self).offset(-10.0);
-            make.top.equalTo(self).offset(5.0);
-            make.bottom.equalTo(self);
+            make.left.equalTo(self).offset(8.0);
+            make.right.equalTo(self).offset(-8.0);
+            make.top.equalTo(self).offset(8.0);
+            make.bottom.equalTo(self).offset(-8.0);
         }];
         
         

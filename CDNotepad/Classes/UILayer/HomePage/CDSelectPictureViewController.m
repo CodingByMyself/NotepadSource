@@ -10,9 +10,8 @@
 #import "CDPictureCollectionCell.h"
 
 @interface CDSelectPictureViewController () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-{
-    NSMutableArray <PHAsset *>* _selectedList;
-}
+
+@property (nonatomic,strong) NSMutableArray <PHAsset *>* selectedList;
 @property (nonatomic,strong) UICollectionView *collectionViewPhoto;
 
 @end
@@ -44,20 +43,30 @@
     self.collectionViewPhoto.dataSource = self;
 }
 
+#pragma mark - IBAction Method
 - (void)navigationRightButtonPressEvent:(UIButton *)button
 {
-//    [self.navigationController pushViewController:_browser animated:YES];
     if (_selectedList.count == 0) {
         [self showTipsViewText:@"您还没有选中的图片哦~" delayTime:1.0];
         return;
     }
     
+    __block NSMutableArray *tempList = [[NSMutableArray alloc] init];
     for (PHAsset *asset in _selectedList){
+        __block NSInteger index = [_selectedList indexOfObject:asset];
+        __block NSInteger count = _selectedList.count;
         [[CDPhotoManager sharePhotos] saveImageWithAsset:asset toSavePathDirectory:[CDTools getSandboxPath] completeNotify:^(BOOL saveResult, NSString *saveFullPath) {
-            
+            [tempList addObject:[saveFullPath stringByReplacingOccurrencesOfString:[CDTools getSandboxPath] withString:@""]];
             NSLog(@"saveResult = %zi , saveFullPath = %@",saveResult,saveFullPath);
             
-            
+            if (index + 1 == count) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (self.selectedComplete) {
+                        self.selectedComplete(tempList);
+                    }
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }
         }];
     }
 }
@@ -73,8 +82,14 @@
     PHAsset *asset = [[[CDPhotoManager sharePhotos] assets] objectAtIndex:indexPath.row];
     
     UIImage *buttonImage = [_selectedList containsObject:asset] ? [UIImage imageNamed:@"photo_image_selected_on_status_icon"] : [UIImage imageNamed:@"photo_image_selected_off_status_icon"];
-    [[CDPhotoManager sharePhotos] getImageWithAsset:asset completeNotify:^(UIImage *image) {
+    [[CDPhotoManager sharePhotos] getImageWithAsset:asset completeNotify:^(UIImage *image, NSString *shortPath) {
         [cell setImage:image andButtonImage:buttonImage];
+        if ([self.oldSelectedPathList containsObject:shortPath]) {
+            [self.oldSelectedPathList removeObject:shortPath];
+            ([self.selectedList containsObject:asset]) ? nil : [self.selectedList insertObject:asset atIndex:0];
+            [cell updateButtonImage:[UIImage imageNamed:@"photo_image_selected_on_status_icon"]];
+        }
+        
     }];
     
     return cell;
@@ -154,6 +169,14 @@
         
     }
     return _collectionViewPhoto;
+}
+
+- (NSMutableArray <PHAsset *> *)selectedList
+{
+    if ([_selectedList isKindOfClass:[NSMutableArray class]] == NO) {
+        _selectedList = [[NSMutableArray alloc] init];
+    }
+    return _selectedList;
 }
 
 

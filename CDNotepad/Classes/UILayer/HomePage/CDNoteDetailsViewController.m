@@ -183,8 +183,10 @@
             [self.collectionViewDetails registerClass:[CDPictureCollectionCell class] forCellWithReuseIdentifier:@"CDPictureCollectionCell"];
             CDPictureCollectionCell * cell = (CDPictureCollectionCell *)[self.collectionViewDetails dequeueReusableCellWithReuseIdentifier:@"CDPictureCollectionCell" forIndexPath:indexPath];
             
+            NSString *filePath = [[CDTools getSandboxPath] stringByAppendingString:[_nodeDetails.picturePathList objectAtIndex:indexPath.row]];
+            [cell setImage:[UIImage imageWithContentsOfFile:filePath] andButtonImage:nil];
             
-            cell.backgroundColor = [UIColor greenColor];
+//            cell.backgroundColor = [UIColor greenColor];
             return cell;
         }
             break;

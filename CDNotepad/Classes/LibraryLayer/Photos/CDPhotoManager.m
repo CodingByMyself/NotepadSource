@@ -125,7 +125,7 @@
 
 #pragma mark 
 // Load from photos library
-- (NSInteger)getImageWithAsset:(PHAsset *)asset completeNotify:(void(^)(UIImage *image))notify
+- (NSInteger)getImageWithAsset:(PHAsset *)asset completeNotify:(void(^)(UIImage *image,NSString *shortPath))notify
 {
     PHImageManager *imageManager = [PHImageManager defaultManager];
     
@@ -133,7 +133,7 @@
     options.networkAccessAllowed = YES;
     options.resizeMode = PHImageRequestOptionsResizeModeExact;
     options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-    options.synchronous = false;
+    options.synchronous = NO;
     options.progressHandler = ^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
         NSLog(@"progress = %f\ninfo = %@",progress,info);
 //        NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -149,12 +149,19 @@
     CGSize imageTargetSize = CGSizeMake(imageSize * scale, imageSize * scale);
     // 按指定尺寸生成图片
     PHImageRequestID id_num = [imageManager requestImageForAsset:asset targetSize:imageTargetSize contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
+        NSString *url = [[info objectForKey:@"PHImageFileURLKey"] absoluteString];
+        NSRange targetRang = [url rangeOfString:@"DCIM"];
+        NSString *shortPath = @"/";
+        if (targetRang.length > 0) {
+            shortPath = [shortPath stringByAppendingString:[url substringWithRange:NSMakeRange(targetRang.location, url.length - targetRang.location)]];
+        } else {
+            shortPath = [shortPath stringByAppendingString:[url lastPathComponent]];
+        }
+        
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            //            self.underlyingImage = result;
-            //            [self imageLoadingComplete];
             NSLog(@"resultHandler -> %@",info);
-            notify ? notify(result) : nil;
-            
+            notify ? notify(result,shortPath) : nil;
         });
     }];
     
@@ -170,7 +177,7 @@
     options.networkAccessAllowed = YES;
     options.resizeMode = PHImageRequestOptionsResizeModeExact;
     options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-    options.synchronous = false;
+    options.synchronous = NO;
     options.progressHandler = ^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
         NSLog(@"progress = %f\ninfo = %@",progress,info);
     };
@@ -178,16 +185,53 @@
     [imageManager requestImageDataForAsset:asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
         
         NSString *url = [[info objectForKey:@"PHImageFileURLKey"] absoluteString];
-        NSString *shortPath = [url substringWithRange:NSMakeRange([url rangeOfString:@"DCIM"].location, url.length - [url rangeOfString:@"DCIM"].location)];
+        NSRange targetRang = [url rangeOfString:@"DCIM"];
+        NSString *shortPath;
+        if (targetRang.length > 0) {
+            shortPath = [url substringWithRange:NSMakeRange(targetRang.location, url.length - targetRang.location)];
+        } else {
+            shortPath = [url lastPathComponent];
+        }
         NSString *path = [savePathDir stringByAppendingPathComponent:shortPath];
-        [[NSFileManager defaultManager] createDirectoryAtPath:[path stringByDeletingLastPathComponent]; withIntermediateDirectories:YES attributes:nil error:ni]
+        [[NSFileManager defaultManager] createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil];
         BOOL result = [[NSFileManager defaultManager] createFileAtPath:path contents:imageData attributes:nil];
         notify ? notify(result,path) : nil;
-        
         
     }];
 }
 
+- (NSInteger)getShortPathWithAsset:(PHAsset *)asset completeNotify:(void(^)(NSString *shortPath))notify
+{
+    PHImageManager *imageManager = [PHImageManager defaultManager];
+    
+    PHImageRequestOptions *options = [PHImageRequestOptions new];
+    options.networkAccessAllowed = YES;
+    options.resizeMode = PHImageRequestOptionsResizeModeFast;
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
+    options.synchronous = NO;
+    options.progressHandler = ^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
+        NSLog(@"progress = %f\ninfo = %@",progress,info);
+    };
+    
+    // 按指定尺寸生成图片
+    PHImageRequestID id_num = [imageManager requestImageForAsset:asset targetSize:CGSizeMake(1, 1) contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
+        NSString *url = [[info objectForKey:@"PHImageFileURLKey"] absoluteString];
+        NSRange targetRang = [url rangeOfString:@"DCIM"];
+        NSString *shortPath = @"/";
+        if (targetRang.length > 0) {
+            shortPath = [shortPath stringByAppendingString:[url substringWithRange:NSMakeRange(targetRang.location, url.length - targetRang.location)]];
+        } else {
+            shortPath = [shortPath stringByAppendingString:[url lastPathComponent]];
+        }
 
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"resultHandler -> %@",info);
+            notify ? notify(shortPath) : nil;
+        });
+    }];
+    
+    return id_num;
+    
+}
 
 @end

@@ -77,7 +77,7 @@
         [self addSubview:_buttonVoice];
         [_buttonVoice mas_makeConstraints:^(MASConstraintMaker *make) {
             //            make.right.equalTo(self.mas_right).offset(-CDScreenMarginAtLeftAndRight);
-            make.left.equalTo(self).offset(10.0);
+            make.left.equalTo(self).offset(8.0);
             make.top.equalTo(self).offset(8.0);
             make.bottom.equalTo(self).offset(-8.0);
             make.width.equalTo(@250);

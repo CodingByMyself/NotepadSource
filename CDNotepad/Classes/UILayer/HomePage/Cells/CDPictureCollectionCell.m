@@ -41,11 +41,12 @@
         _imageViewPicture = [[UIImageView alloc] init];
         _imageViewPicture.contentMode = UIViewContentModeScaleAspectFill;
         _imageViewPicture.clipsToBounds = YES;
+        _imageViewPicture.layer.cornerRadius = 3.0f;
         [self addSubview:_imageViewPicture];
         [_imageViewPicture mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self);
-            make.right.equalTo(self);
-            make.top.equalTo(self);
+            make.left.equalTo(self).offset(5.0);
+            make.right.equalTo(self).offset(-5.0);
+            make.top.equalTo(self).offset(5.0);
             make.bottom.equalTo(self);
         }];
     }
@@ -62,14 +63,14 @@
         [_buttonSelected mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self);
             make.top.equalTo(self);
-            make.height.equalTo(@(SCREEN_WIDTH/3.0/3.0));
+            make.height.equalTo(@(SCREEN_WIDTH/3.0/4.0));
             make.width.equalTo(_buttonSelected.mas_height);
         }];
         
         [_buttonSelected.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(_buttonSelected.mas_centerX);
-            make.centerY.equalTo(_buttonSelected.mas_centerY);
-            make.height.equalTo(@(SCREEN_WIDTH/3.0/3.0/3.0*2.0));
+            make.centerX.equalTo(_buttonSelected.mas_centerX).offset(15.0);
+            make.centerY.equalTo(_buttonSelected.mas_centerY).offset(-5.0);
+            make.height.equalTo(@(SCREEN_WIDTH/3.0/3.0/3.0*1.2));
             make.width.equalTo(_buttonSelected.imageView.mas_height);
         }];
         
