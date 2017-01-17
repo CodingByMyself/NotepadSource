@@ -35,9 +35,17 @@
     self.tableViewRegister.dataSource = self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[CDKeyboardManager sharedKeyboard] setEventDelegate:self];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+    
     [self.navigationController setNavigationBarHidden:YES];
 }
 
@@ -85,6 +93,35 @@
     } else {
         [self showTipsViewText:@"注册失败，请稍后重试" delayTime:1.0];
     }
+}
+
+#pragma mark 键盘事件
+- (void)keyboardWillShowEventByUserInfo:(NSDictionary *)userInfo
+{
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect bounds = [value CGRectValue];
+    NSLog(@"%@",NSStringFromCGRect(bounds));
+    [self.tableViewRegister mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view).offset(-bounds.size.height);
+    }];
+    [UIView animateWithDuration:[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)keyboardWillHiddenEventByUserInfo:(NSDictionary *)userInfo
+{
+    [self.tableViewRegister mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view).offset(0);
+    }];
+    [UIView animateWithDuration:[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 
