@@ -356,6 +356,7 @@
         _filterView = [[CDFilterSelectView alloc] initWithFilterDataList:menuTitle onSelectedBlock:^(NSInteger index) {
             _filterIndex = index;
             
+            // 更新title显示
             UILabel *title = [self.buttonTitle viewWithTag:100];
             title.text = menuTitle[_filterIndex];
             CGSize textSize = [title textRectForBounds:CGRectMake(0, 0, SCREEN_WIDTH - 200.0, 64.0) limitedToNumberOfLines:1].size;
@@ -370,10 +371,11 @@
         }];
         [self.view addSubview:_filterView];
         [_filterView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view);
-            make.centerX.equalTo(self.view);
-            make.height.equalTo(@160);
-            make.width.equalTo(@120);
+//            make.top.equalTo(self.view);
+//            make.centerX.equalTo(self.view);
+//            make.height.equalTo(@160);
+//            make.width.equalTo(@120);
+            make.edges.equalTo(self.view);
         }];
     }
     return _filterView;
