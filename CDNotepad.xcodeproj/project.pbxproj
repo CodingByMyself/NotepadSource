@@ -939,7 +939,7 @@
 				TargetAttributes = {
 					37F064AD1E20D5BB00653D2E = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = Q2292425WF;
+						DevelopmentTeam = JJ7UXEWGQR;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1220,7 +1220,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = Q2292425WF;
+				DEVELOPMENT_TEAM = JJ7UXEWGQR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CDNotepad/Classes/LibraryLayer/Realm",
@@ -1244,7 +1244,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = Q2292425WF;
+				DEVELOPMENT_TEAM = JJ7UXEWGQR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CDNotepad/Classes/LibraryLayer/Realm",

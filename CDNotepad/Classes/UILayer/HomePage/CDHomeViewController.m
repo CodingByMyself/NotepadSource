@@ -352,9 +352,20 @@
 - (CDFilterSelectView *)filterView
 {
     if (_filterView == nil) {
-        
-        _filterView = [[CDFilterSelectView alloc] initWithFilterDataList:@[@"全部",@"本周",@"本月",@"一个月前"] onSelectedBlock:^(NSInteger index) {
+        NSArray *menuTitle = @[@"全部",@"本周",@"本月",@"一个月前"];
+        _filterView = [[CDFilterSelectView alloc] initWithFilterDataList:menuTitle onSelectedBlock:^(NSInteger index) {
             _filterIndex = index;
+            
+            UILabel *title = [self.buttonTitle viewWithTag:100];
+            title.text = menuTitle[_filterIndex];
+            CGSize textSize = [title textRectForBounds:CGRectMake(0, 0, SCREEN_WIDTH - 200.0, 64.0) limitedToNumberOfLines:1].size;
+            [title mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(_buttonTitle.mas_centerX).offset(6.0);
+                make.width.equalTo(@(textSize.width + 5.0));
+            }];
+            self.buttonTitle.cd_size = CGSizeMake(textSize.width + 10*2.0 + 15.0, 44.0);
+            self.navigationItem.titleView = self.buttonTitle;
+            
             [self filterDataListByIndex:_filterIndex];
         }];
         [self.view addSubview:_filterView];

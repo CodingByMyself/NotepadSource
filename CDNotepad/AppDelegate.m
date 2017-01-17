@@ -16,11 +16,27 @@
 
 @implementation AppDelegate
 
+- (void)applyForAVAudioSession
+{
+    AVAudioSession *avSession = [AVAudioSession sharedInstance];
+    if ([avSession respondsToSelector:@selector(requestRecordPermission:)]) {
+        [avSession requestRecordPermission:^(BOOL available) {
+            if (available) {
+                //completionHandler
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[[UIAlertView alloc] initWithTitle:@"无法录音" message:@"请在“设置-隐私-麦克风”选项中允许xx访问你的麦克风" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+                });
+            }
+        }];
+    }
+}
 
+#pragma mark - AppDelegate Method
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [[XHSoundRecorder sharedSoundRecorder] stopRecorder]; // 初始化录音
+    [self applyForAVAudioSession]; // 初始化录音
     [CDPhotoManager sharePhotos];  // 初始化相册
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
