@@ -73,6 +73,7 @@
         
         
         [_labelTextViewPlaceholder removeFromSuperview];
+        _labelTextViewPlaceholder.userInteractionEnabled = NO;
         _labelTextViewPlaceholder = [[UILabel alloc] init];
         _labelTextViewPlaceholder.text  = @"最多输入500个字符";
         _labelTextViewPlaceholder.textColor = [UIColor lightGrayColor];

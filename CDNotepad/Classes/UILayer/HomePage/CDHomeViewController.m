@@ -69,14 +69,11 @@
 #pragma mark
 - (void)initTitleView
 {
-    [self.buttonTitle addTarget:self action:@selector(navigationButtonPressEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside]; // 监听按钮点击
-    self.buttonTitle.tag = 0;
     UILabel *title = [self.buttonTitle viewWithTag:100];
     _filterIndex = 0;
     title.text = @"全部";
     CGSize textSize = [title textRectForBounds:CGRectMake(0, 0, SCREEN_WIDTH - 200.0, 64.0) limitedToNumberOfLines:1].size;
     [title mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_buttonTitle).offset(10.0);
         make.width.equalTo(@(textSize.width + 5.0));
     }];
     self.buttonTitle.cd_size = CGSizeMake(textSize.width + 10*2.0 + 15.0, 44.0);
@@ -319,6 +316,9 @@
     if (_buttonTitle == nil) {
         _buttonTitle = [[UIButton alloc] init];
         
+        [_buttonTitle addTarget:self action:@selector(navigationButtonPressEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside]; // 监听按钮点击
+        _buttonTitle.tag = 0;
+        
         UILabel *label = [[UILabel alloc] init];
         label.tag = 100;
         label.textAlignment = NSTextAlignmentCenter;
@@ -326,7 +326,7 @@
         label.textColor = NavigationBarTitleColor;
         [_buttonTitle addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(_buttonTitle);
+            make.centerX.equalTo(_buttonTitle.mas_centerX).offset(6.0);
             make.top.equalTo(_buttonTitle);
             make.bottom.equalTo(_buttonTitle);
             make.width.equalTo(@25.0);
@@ -355,13 +355,13 @@
         NSArray *menuTitle = @[@"全部",@"本周",@"本月",@"一个月前"];
         _filterView = [[CDFilterSelectView alloc] initWithFilterDataList:menuTitle onSelectedBlock:^(NSInteger index) {
             _filterIndex = index;
+            _buttonTitle = nil;
             
             // 更新title显示
             UILabel *title = [self.buttonTitle viewWithTag:100];
             title.text = menuTitle[_filterIndex];
             CGSize textSize = [title textRectForBounds:CGRectMake(0, 0, SCREEN_WIDTH - 200.0, 64.0) limitedToNumberOfLines:1].size;
             [title mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(_buttonTitle.mas_centerX).offset(6.0);
                 make.width.equalTo(@(textSize.width + 5.0));
             }];
             self.buttonTitle.cd_size = CGSizeMake(textSize.width + 10*2.0 + 15.0, 44.0);
