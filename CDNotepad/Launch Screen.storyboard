@@ -27,14 +27,14 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cpl-4h-e2k">
-                                <rect key="frame" x="138" y="184" width="100" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cpl-4h-e2k">
+                                <rect key="frame" x="63" y="109" width="250" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="ip1-vE-XIU"/>
-                                    <constraint firstAttribute="width" constant="100" id="y4n-8H-34X"/>
+                                    <constraint firstAttribute="height" constant="250" id="ip1-vE-XIU"/>
+                                    <constraint firstAttribute="width" constant="250" id="y4n-8H-34X"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="记事本" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="GJd-Yh-RWb">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="记事本" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="GJd-Yh-RWb">
                                 <rect key="frame" x="133" y="212" width="109" height="43"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
                                 <color key="textColor" red="0.99215686270000003" green="0.65098039220000004" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
