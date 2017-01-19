@@ -22,8 +22,25 @@
 {
     self.buttonVoice.backgroundColor = [UIColor whiteColor];
     [self.buttonVoice addTarget:self action:@selector(buttonPlayerVoice:) forControlEvents:UIControlEventTouchUpInside];
+    [self.buttonDelete addTarget:self action:@selector(buttonDeleteOnVoiceCellClciked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)setDisableEidt
+{
+    self.buttonDelete.hidden = YES;
+}
+
+- (void)setPath:(NSString *)path
+{
+    _path = path;
+    UILabel *title = [self.buttonVoice viewWithTag:1];
+    title.text = [NSString stringWithFormat:@"%@【点击播放】",[_path lastPathComponent]];
+    [title mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@([title textRectForBounds:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) limitedToNumberOfLines:1].size.width + 5.0));
+    }];
+}
+
+#pragma mark - IBaction
 - (void)buttonPlayerVoice:(UIButton *)button
 {
     NSString *fullPath = [[CDTools getSandboxPath] stringByAppendingString:_path];
@@ -45,25 +62,12 @@
     }];
 }
 
-- (void)setButtonDeleteAction:(SEL)action andTarget:(id)target
+- (void)buttonDeleteOnVoiceCellClciked:(UIButton *)button
 {
-    [self.buttonDelete addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    self.buttonDelete.tag = self.tag;
-}
-
-- (void)setDisableEidt
-{
-    self.buttonDelete.hidden = YES;
-}
-
-- (void)setPath:(NSString *)path
-{
-    _path = path;
-    UILabel *title = [self.buttonVoice viewWithTag:1];
-    title.text = [NSString stringWithFormat:@"%@【点击播放】",[_path lastPathComponent]];
-    [title mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@([title textRectForBounds:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) limitedToNumberOfLines:1].size.width + 5.0));
-    }];
+    NSLog(@"删除语音");
+    if (_delegate && [_delegate respondsToSelector:@selector(voiceCell:buttonDeleteCicked:)]) {
+        [_delegate voiceCell:self buttonDeleteCicked:self.buttonDelete];
+    }
 }
 
 #pragma mark - Getter Method
@@ -123,10 +127,17 @@
         _buttonDelete.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:_buttonDelete];
         [_buttonDelete mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.buttonVoice.mas_right).offset(10.0);
+            make.left.equalTo(self.buttonVoice.mas_right).offset(0);
             make.top.equalTo(self);
             make.bottom.equalTo(self);
-            make.width.equalTo(@15.0);
+            make.width.equalTo(@40.0);
+        }];
+        
+        [_buttonDelete.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(_buttonDelete);
+            make.centerY.equalTo(_buttonDelete);
+            make.height.equalTo(@15);
+            make.width.equalTo(_buttonDelete.imageView.mas_height);
         }];
         
     }

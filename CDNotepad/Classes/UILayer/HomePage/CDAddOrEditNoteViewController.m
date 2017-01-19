@@ -15,7 +15,7 @@
 #import "CDNoteModel.h"
 #import "XHSoundRecorder.h"
 
-@interface CDAddOrEditNoteViewController () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,CDKeyboardManagerDelegate,CDAddAttachmentMenuViewDelegate,CDPictureCollectionCellDelegate>
+@interface CDAddOrEditNoteViewController () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,CDKeyboardManagerDelegate,CDAddAttachmentMenuViewDelegate,CDPictureCollectionCellDelegate,CDVoiceCollectionCellDelegate>
 {
     NSInteger _type;
     CDNoteModel *_currentNode;
@@ -133,14 +133,6 @@
     }
 }
 
-
-- (void)buttonDeleteOnVoiceCellClciked:(UIButton *)button
-{
-    NSLog(@"删除语音");
-    [_currentNode.voicePathList removeObjectAtIndex:button.tag];
-    [self.collectionViewAdd reloadData];
-}
-
 #pragma mark - CDAddAttachmentMenuView Delegate
 - (void)menuView:(CDAddAttachmentMenuView *)menuView buttonSelectPictureClicked:(UIButton *)button
 {
@@ -179,11 +171,20 @@
     [self updateTitleViewByNewDate:selectedDate];
 }
 
-#pragma mark - CDPictureCollectionCell Delegate
+#pragma mark  CDPictureCollectionCell Delegate
 - (void)collectionPictiureCell:(CDPictureCollectionCell *)cell buttonClicked:(UIButton *)button
 {
     NSInteger index = [[self.collectionViewAdd indexPathForCell:cell] row];
     [_currentNode.picturePathList removeObjectAtIndex:index];
+    [self.collectionViewAdd reloadData];
+}
+
+#pragma mark  CDVoiceCollectionCell Delegate
+- (void)voiceCell:(CDVoiceCollectionCell *)cell buttonDeleteCicked:(UIButton *)button
+{
+    NSLog(@"删除语音");
+    NSIndexPath *indexPath = [self.collectionViewAdd indexPathForCell:cell];
+    [_currentNode.voicePathList removeObjectAtIndex:indexPath.row];
     [self.collectionViewAdd reloadData];
 }
 
@@ -244,8 +245,8 @@
             [self.collectionViewAdd registerClass:[CDVoiceCollectionCell class] forCellWithReuseIdentifier:@"CDVoiceCollectionCell"];
             CDVoiceCollectionCell * cell = (CDVoiceCollectionCell *)[self.collectionViewAdd dequeueReusableCellWithReuseIdentifier:@"CDVoiceCollectionCell" forIndexPath:indexPath];
             cell.path = [_currentNode.voicePathList objectAtIndex:indexPath.row];
+            cell.delegate = self;
             [cell setup];
-            [cell setButtonDeleteAction:@selector(buttonDeleteOnVoiceCellClciked:) andTarget:self];
             
             cell.tag = [indexPath row];
             return cell;
