@@ -152,6 +152,7 @@
         NSString *url = [[info objectForKey:@"PHImageFileURLKey"] absoluteString];
         NSRange targetRang = [url rangeOfString:@"DCIM"];
         NSString *shortPath = @"/";
+        url = url.length > 0 ? url : @"";
         if (targetRang.length > 0) {
             shortPath = [shortPath stringByAppendingString:[url substringWithRange:NSMakeRange(targetRang.location, url.length - targetRang.location)]];
         } else {
